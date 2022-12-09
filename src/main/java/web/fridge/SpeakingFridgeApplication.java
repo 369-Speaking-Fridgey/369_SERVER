@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpeakingFridgyApplication {
+public class SpeakingFridgeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpeakingFridgyApplication.class, args);
+		SpringApplication.run(SpeakingFridgeApplication.class, args);
 	}
 
 }
