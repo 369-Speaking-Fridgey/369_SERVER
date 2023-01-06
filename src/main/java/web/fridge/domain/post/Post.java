@@ -1,28 +1,44 @@
-package web.fridge.domain.hello.entity;
+package web.fridge.domain.post;
+
+import web.fridge.domain.image.Image;
+import web.fridge.domain.member.Member;
+import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "post")
-public class PostEntity {
+public class Post extends BaseTimeEntity {
     //post 테이블 20230105
 
     //`post_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_id;
+    private Long postId;
 
     // `request_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
-    private Long request_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "request_id")
+    private Member member;
     //`response_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
-    private Long response_id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "buyer_id")
+    private Member buyer;
 
     //`image_id`	BIGINT	NOT NULL,
     @OneToOne(optional = false)
     @JoinColumn(name = "image_id")
-    private ImageEntity image;
+    private Image image;
+
+    @Column(length = 225)
+    private String title;
+
+    @Column()
+    private String contents;
 
     //`product`	VARCHAR(255)	NULL,
     @Column(length = 225)
@@ -34,12 +50,11 @@ public class PostEntity {
     //`expiry_date`	DATETIME	NULL,
     // `exchange_date`	DATETIME	NULL,
     // `margin_date`	DATETIME	NULL
-    private LocalDate expiry_date;
-    private LocalDate margin_date;
-    private LocalDate exchange_date;
+    private LocalDateTime expiredAt;
 
-    //`exchange_time`	DATETIME	NULL,
-    private LocalTime exchange_time;
+    private LocalDateTime requestAt;
+
+    private LocalDateTime exchangeAt;
 
     //`method`	VARCHAR(255)	NULL,
     @Column(length = 225)

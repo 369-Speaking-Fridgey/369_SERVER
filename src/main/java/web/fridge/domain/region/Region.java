@@ -1,11 +1,11 @@
-package web.fridge.domain.hello.entity;
+package web.fridge.domain.region;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "region")
-public class RegionEntity {
+public class Region {
     //region 테이블 20230105
     /*  `region_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
         `region_name`	VARCHAR(64)	NULL,
@@ -13,10 +13,10 @@ public class RegionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long region_id;
+    private Long regionId;
 
     @Column(length = 64)
-    private String region_name;
+    private String name;
 
-    private  Long region_group;
+    private  Long group;
 }

@@ -1,27 +1,31 @@
-package web.fridge.domain.hello.entity;
+package web.fridge.domain.food;
+
+import org.springframework.data.annotation.CreatedDate;
+import web.fridge.domain.member.Member;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "food")
-public class FoodEntity {
+public class Food {
     //food 테이블 20230105
 
     //`food_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long food_id;
+    private Long foodId;
 
     //`member_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private MemberEntity member;
+    private Member member;
 
     //`food_name`	VARCHAR(36)	NULL,
     @Column(length = 36)
-    private String food_name;
+    private String name;
 
     //`quantity`	BIGINT	NULL,
     private Long quantity;
@@ -35,9 +39,10 @@ public class FoodEntity {
     private String type;
 
     //`created_at`	DATETIME	NULL	COMMENT 'current_timestamp'
-    private LocalDate created_at = LocalDate.now();
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     //`expiry_date`	DATETIME	NULL
-    private LocalDate expiry_date;
+    private LocalDateTime expiredAt;
 
 }

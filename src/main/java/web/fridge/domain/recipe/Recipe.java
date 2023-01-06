@@ -1,26 +1,28 @@
-package web.fridge.domain.hello.entity;
+package web.fridge.domain.recipe;
+
+import web.fridge.domain.image.Image;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "recipe")
-public class RecipeEntity {
+public class Recipe {
     //recipe 테이블 2023010
 
     //`recipe_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long recipe_id;
+    private Long recipeId;
 
     //`image_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @OneToOne(optional = false)
     @JoinColumn(name = "image_id")
-    private ImageEntity image;
+    private Image image;
 
     //`recipe_name`	VARCHAR(64)	NULL,
     @Column(length = 64)
-    private String recipe_name;
+    private String name;
 
     //`url`	VARCHAR(255)	NULL*/
     @Column(length = 225)
