@@ -1,4 +1,4 @@
-package web.fridge.domain.image;
+package web.fridge.global.config;
 
 
 import com.amazonaws.auth.AWSCredentials;
