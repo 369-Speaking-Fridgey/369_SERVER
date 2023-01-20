@@ -10,4 +10,7 @@ public class MemberController {
     public String test(@RequestParam String req){
         return req + "실행 완료";
     }
+
+
+
 }
