@@ -32,6 +32,9 @@ public class LogInController {
     public ResponseEntity<Object> kakaoLogIn(HttpServletRequest request){
         JSONObject kakaoRequest = jsonUtil.decodeHttpRequest(request);
         logInService.saveKakaoMember(kakaoRequest);
+        log.info(kakaoRequest.toJSONString());
+        log.info(kakaoRequest.get("kakao_account").toString());
+
         return ResponseEntity.ok(200);
     }
 

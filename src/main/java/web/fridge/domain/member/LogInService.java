@@ -11,6 +11,6 @@ import java.net.URI;
 public class LogInService {
     private final MemberRepository memberRepository;
     public void saveKakaoMember(JSONObject kakaoRequest) {
-        Member member = Member.
+        // Member member = Member.
     }
 }
