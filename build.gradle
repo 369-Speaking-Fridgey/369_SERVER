@@ -40,6 +40,9 @@ dependencies {
 
 	//s3
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.380'
+
+	//jsoup
+	implementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.named('test') {
