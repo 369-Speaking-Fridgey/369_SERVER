@@ -31,7 +31,7 @@ public class ImageService {
         objMeta.setContentLength(multipartFile.getInputStream().available());
         //s3 파일 업로드
         amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
-        //S3 url 받아오기 <에러남 Endpoint does not contain a valid host name: null
+        //S3 url 받아오기
         String s3Url = amazonS3.getUrl(bucket, s3FileName).toString();
 
         //image table
