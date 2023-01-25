@@ -24,7 +24,7 @@ public class LogInController {
     @PostMapping("/kakao")
     public ResponseEntity<String> kakaoLogIn(HttpServletRequest request){
         JSONObject kakaoRequest = jsonUtil.decodeHttpRequest(request);
-        return logInService.saveKakaoMember(kakaoRequest);;
+        return logInService.saveKakaoMember(kakaoRequest);
     }
 
 }

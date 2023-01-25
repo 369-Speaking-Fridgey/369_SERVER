@@ -24,6 +24,6 @@ public class LogInService {
                 .nickname(kakaoAccountInfo.get("nickname").toString())
                 .provider("KAKAO")
                 .build();
-        return new ResponseEntity<>("가입에 성공했습니다", HttpStatus.OK);
+        return new ResponseEntity<>("카카오 로그인에 성공했습니다", HttpStatus.OK);
     }
 }
