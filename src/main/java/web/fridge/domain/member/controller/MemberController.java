@@ -1,4 +1,4 @@
-package web.fridge.domain.member;
+package web.fridge.domain.member.controller;
 
 import org.springframework.web.bind.annotation.*;
 

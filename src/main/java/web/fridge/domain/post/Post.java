@@ -1,13 +1,11 @@
 package web.fridge.domain.post;
 
 import web.fridge.domain.image.Image;
-import web.fridge.domain.member.Member;
+import web.fridge.domain.member.entity.Member;
 import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "post")
