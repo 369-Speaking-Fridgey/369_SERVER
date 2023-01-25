@@ -20,11 +20,6 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    /*`nickname`	VARCHAR(64)	NULL,
-    * `provider`	VARCHAR(64)	NULL	COMMENT 'check(GOOGLE, KAKAO, NAVER)',
-	`email`	VARCHAR(64)	NULL,
-	`profile`	VARCHAR(255)	NULL,
-	`address`	VARCHAR(255)	NULL*/
     @Column(length = 64)
     private String nickname;
 

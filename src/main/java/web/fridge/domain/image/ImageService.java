@@ -31,7 +31,7 @@ public class ImageService {
         objMeta.setContentLength(multipartFile.getInputStream().available());
         
         amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
-        
+
         String s3Url = amazonS3.getUrl(bucket, s3FileName).toString();
 
         Image image = new Image().initImage(s3Url,s3FileName);
