@@ -24,17 +24,16 @@ public class ImageService {
 
     public String upload(MultipartFile multipartFile) throws IOException {
 
-        //파일 이름 중복 방지 UUID 사용
+        
         String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
-        //파일 사이즈 체크
+        
         ObjectMetadata objMeta = new ObjectMetadata();
         objMeta.setContentLength(multipartFile.getInputStream().available());
-        //s3 파일 업로드
+        
         amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
-        //S3 url 받아오기
+
         String s3Url = amazonS3.getUrl(bucket, s3FileName).toString();
 
-        //image table
         Image image = new Image().initImage(s3Url,s3FileName);
         imageRepository.save(image);
 
