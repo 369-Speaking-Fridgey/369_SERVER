@@ -10,9 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import web.fridge.domain.recipe.controller.RecipeController;
+import web.fridge.domain.recipe.controller.dto.RecipeResponseDTO;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -22,6 +26,16 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
 
     private static String RankedRecipeURL="https://www.10000recipe.com/ranking/home_new.html?rtype=r&dtype=d";
+
+    public ResponseEntity<List<RecipeResponseDTO>> findAllRecipe(){
+        List<Recipe> recipes = recipeRepository.findAll();
+        List<RecipeResponseDTO> responseDTOList = new ArrayList<>();
+
+        for(Recipe recipe : recipes){
+            responseDTOList.add(RecipeResponseDTO.builder().entity(recipe).build());
+        }
+        return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
+    };
 
     @PostConstruct
     public ResponseEntity<String> crawlRankedRecipe() throws IOException{

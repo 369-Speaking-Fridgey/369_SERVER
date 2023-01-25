@@ -1,6 +1,7 @@
 package web.fridge.domain.recipe;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import web.fridge.domain.image.Image;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
+@Getter
 @Table(name = "recipe")
 public class Recipe {
 

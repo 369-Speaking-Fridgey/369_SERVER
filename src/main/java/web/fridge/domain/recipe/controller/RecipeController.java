@@ -1,4 +1,4 @@
-package web.fridge.domain.recipe;
+package web.fridge.domain.recipe.controller;
 
 
 import lombok.RequiredArgsConstructor;
@@ -6,9 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import web.fridge.domain.recipe.RecipeService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 @Slf4j
@@ -30,8 +32,8 @@ public class RecipeController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getTopRecipe(){
-        return new ResponseEntity<>("레시피 반환 완료(나중에 Dto 반환으로 변경)", HttpStatus.OK);
+    public ResponseEntity<?> getTopRecipe(){
+        return recipeService.findAllRecipe();
     }
 
 }
