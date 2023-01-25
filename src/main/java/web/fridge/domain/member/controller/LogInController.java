@@ -22,13 +22,9 @@ public class LogInController {
     private final LogInService logInService;
 
     @PostMapping("/kakao")
-    public ResponseEntity<Object> kakaoLogIn(HttpServletRequest request){
+    public ResponseEntity<String> kakaoLogIn(HttpServletRequest request){
         JSONObject kakaoRequest = jsonUtil.decodeHttpRequest(request);
-        logInService.saveKakaoMember(kakaoRequest);
-        log.info(kakaoRequest.toJSONString());
-        log.info(kakaoRequest.get("kakao_account").toString());
-
-        return ResponseEntity.ok(200);
+        return logInService.saveKakaoMember(kakaoRequest);;
     }
 
 }

@@ -1,5 +1,6 @@
 package web.fridge.domain.member.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import web.fridge.domain.region.Region;
 import web.fridge.global.entity.BaseTimeEntity;
@@ -30,8 +31,12 @@ public class Member extends BaseTimeEntity {
     @Column(length = 225)
     private String profile;
 
-    @Column(length = 225)
-    private String address;
-
-
+    @Builder
+    public Member(Region region, String nickname, String provider, String email, String profile) {
+        this.region = region;
+        this.nickname = nickname;
+        this.provider = provider;
+        this.email = email;
+        this.profile = profile;
+    }
 }
