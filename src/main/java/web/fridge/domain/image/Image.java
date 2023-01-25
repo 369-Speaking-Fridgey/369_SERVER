@@ -2,6 +2,7 @@ package web.fridge.domain.image;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "image")
 public class Image {
@@ -19,4 +20,11 @@ public class Image {
     //`url`	VARCHAR(255)	NULL
     @Column(length = 225)
     private String url;
+
+    public Image initImage(String url, String name){
+        this.url = url;
+        this.name = name;
+        return this;
+    }
+
 }
