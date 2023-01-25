@@ -1,8 +1,14 @@
 package web.fridge.domain.region;
 
+import lombok.Getter;
+import lombok.ToString;
+import org.json.simple.JSONObject;
+
 import javax.persistence.*;
 
 
+@Getter //log
+@ToString //log 
 @Entity
 @Table(name = "region")
 public class Region {
@@ -12,11 +18,29 @@ public class Region {
 	    `region_group`	BIGINT	NULL*/
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long regionId;
 
-    @Column(length = 64)
-    private String name;
+    @Column(length = 4)
+    private String area0;
 
-    private  Long group;
+    @Column(length = 255)
+    private String area1;
+
+    @Column(length = 255)
+    private String area2;
+
+    @Column(length = 255)
+    private String area3;
+
+    @Column(length = 255)
+    private String area4;
+
+    public  Region initRegion(Long id, JSONObject area0, JSONObject area1,JSONObject area2, JSONObject area3 ){
+        this.regionId = id;
+        this.area0 = area0.get("name").toString();
+        this.area1 = area1.get("name").toString();
+        this.area2 = area2.get("name").toString();
+        this.area3 = area1.get("name").toString();
+        return  this;
+    }
 }
