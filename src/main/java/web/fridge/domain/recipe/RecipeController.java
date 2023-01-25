@@ -22,12 +22,10 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-    //서비스단 48번째줄 디버그 찍고 돌려보면 단위별 객체화 잘되는거 확인됨. 이미지 다운로드 때문에 save 처리 아직 안함
-   @PostMapping("/top100")
+   @PostMapping("/crawl")
     public ResponseEntity<String> uploadTopRecipe() throws IOException {
-        recipeService.crawlRankedRecipe();
-        return new ResponseEntity<>("레시피 100위 저장 완료", HttpStatus.OK);
-    }
+        return recipeService.crawlRankedRecipe();
+   }
 
     @GetMapping
     public ResponseEntity<String> getTopRecipe(){
