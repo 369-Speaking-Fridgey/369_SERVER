@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -42,6 +43,12 @@ public class RecipeService {
 
         return new ResponseEntity<>("레시피 100위 저장 완료", HttpStatus.OK);
 
+    }
+
+    @Transactional
+    public ResponseEntity<String> deleteAllRecipe(){
+        recipeRepository.deleteAll();
+        return new ResponseEntity<>("레시피 전체 삭제 완료", HttpStatus.OK);
     }
 
 }
