@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "member")
-public class Member extends BaseTimeEntity {
+public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
