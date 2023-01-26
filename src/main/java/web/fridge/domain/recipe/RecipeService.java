@@ -37,7 +37,6 @@ public class RecipeService {
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     };
 
-    @PostConstruct
     public ResponseEntity<String> crawlRankedRecipe() throws IOException{
 
         Document doc = Jsoup.connect(RankedRecipeURL).get();
