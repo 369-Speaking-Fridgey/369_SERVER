@@ -1,22 +1,23 @@
-package web.fridge.domain.member;
+package web.fridge.domain.member.entity;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import web.fridge.domain.region.Region;
 import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
 @Table(name = "member")
-public class Member extends BaseTimeEntity {
-    //member 테이블 20230105
-
-    //`member_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY'
+@NoArgsConstructor
+public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    //`region_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY'
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "region_id")
     private Region region;
 
@@ -32,8 +33,12 @@ public class Member extends BaseTimeEntity {
     @Column(length = 225)
     private String profile;
 
-    @Column(length = 225)
-    private String address;
-
-
+    @Builder
+    public Member(Region region, String nickname, String provider, String email, String profile) {
+        this.region = region;
+        this.nickname = nickname;
+        this.provider = provider;
+        this.email = email;
+        this.profile = profile;
+    }
 }
