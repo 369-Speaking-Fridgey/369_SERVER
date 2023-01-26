@@ -2,6 +2,7 @@ package web.fridge.domain.member.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import web.fridge.domain.region.Region;
 import web.fridge.global.entity.BaseTimeEntity;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "member")
+@NoArgsConstructor
 public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
