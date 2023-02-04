@@ -1,7 +1,8 @@
 package web.fridge.domain.food;
 
 import org.springframework.data.annotation.CreatedDate;
-import web.fridge.domain.member.Member;
+import web.fridge.domain.member.entity.Member;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
