@@ -1,4 +1,4 @@
-package web.fridge.domain.post;
+package web.fridge.domain.post.entity;
 
 import web.fridge.domain.image.Image;
 import web.fridge.domain.member.entity.Member;
