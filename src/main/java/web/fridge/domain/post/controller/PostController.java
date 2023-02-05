@@ -45,7 +45,7 @@ public class PostController {
 
     //get 위치 기반 식재료 거래 목록 반환 사용자 위치(region)기반 식재료 조회
     @GetMapping
-    public ResponseEntity<String> PostByRegionList(
+    public ResponseEntity<String> postByRegionList(
             @AuthMember Member member,
             @RequestHeader(value = "Authorization") String token){
         log.info("[PostController][PostByRegionList]:{}",member.toString());
@@ -56,7 +56,7 @@ public class PostController {
 
     //get 사용자별 거래 조회
     @GetMapping
-    public ResponseEntity<String> PostByMemberList(
+    public ResponseEntity<String> postByMemberList(
             @AuthMember Member member,
             @RequestHeader(value = "Authorization") String token){
         log.info("[PostController][PostByMemberList]:{}",member.toString());
@@ -93,5 +93,15 @@ public class PostController {
         log.info("[PostController][dealStatusModify]:{}",member.toString());
         postModifyService.modifyDealStatus();
         return new ResponseEntity<>("complete deal", HttpStatus.OK);
+    }
+
+    //Get 거래 단건 조회
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<String> postByPostID(
+            @RequestHeader(value = "Authorization") String token,
+            @PathVariable(value = "postId") Long postId
+    ){
+        postFindService.findPostByPostID();
+        return new ResponseEntity<>("get a post By postID",HttpStatus.OK);
     }
 }
