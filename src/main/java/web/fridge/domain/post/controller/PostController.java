@@ -56,7 +56,6 @@ public class PostController {
 
     }
 
-    //Get 거래 포스트 단건 조회
     @GetMapping("/{postId}")
     public ResponseEntity<String> postByPostID(
             @AuthMember Member member,
