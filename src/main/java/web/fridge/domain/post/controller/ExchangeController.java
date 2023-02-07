@@ -7,10 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
+import web.fridge.domain.post.entity.Exchange;
 import web.fridge.domain.post.service.PostFindService;
 import web.fridge.domain.post.service.PostModifyService;
 import web.fridge.domain.post.service.PostRegisterService;
 import web.fridge.domain.post.service.PostRemoveService;
+
+import java.util.List;
 
 
 @Slf4j
@@ -24,13 +27,13 @@ public class ExchangeController {
     private final PostRemoveService postRemoveService;
     private final PostModifyService postModifyService;
 
-    //get 사용자별 요청된 거래 조회
+
     @GetMapping("/member")
-    public ResponseEntity<String> exchangeByMemberList(
+    public ResponseEntity<List> exchangeByMemberList(
             @AuthMember Member member){
         log.info("[ExchangeController][exchangeByMemberList]:{}",member.getMemberId().toString());
-        postFindService.findExchangeByMember(member);
-        return new ResponseEntity<>("get exchange by Member", HttpStatus.OK);
+        List<Exchange> exchanges = postFindService.findExchangeByMember(member);
+        return new ResponseEntity<>(exchanges, HttpStatus.OK);
     }
 
     //post 식재료 거래 요청
