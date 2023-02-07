@@ -23,7 +23,7 @@ public class Exchange extends BaseTimeEntity {
     @JoinColumn(name ="post_id")
     private Post post;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(length = 10)
     private String status;
