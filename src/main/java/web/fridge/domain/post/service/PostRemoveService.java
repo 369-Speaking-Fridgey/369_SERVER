@@ -17,14 +17,16 @@ public class PostRemoveService {
     private final ExchangeRepository exchangeRepository;
 
     @Transactional //채팅 추가 시 관련 채팅방 삭제도 해야함
-    public void removePost(Member member, Long postId){
+    public void removePost(Long postId){
         Post post = postRepository.findByPostId(postId);
-        Exchange exchange = exchangeRepository.findByPost(post);
         postRepository.delete(post);
-        exchangeRepository.delete(exchange);
+        //removeExchange(postId); 포스트 삭제 시 거래도 삭제 되게 할건지 역대 거래 조회..?
     }
 
-    public void removeExchange(Member member){
-
+    @Transactional
+    public void removeExchange(Long postId){
+        Post post = postRepository.findByPostId(postId);
+        Exchange exchange = exchangeRepository.findByPost(post);
+        exchangeRepository.delete(exchange);
     }
 }

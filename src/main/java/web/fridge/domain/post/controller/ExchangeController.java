@@ -49,7 +49,7 @@ public class ExchangeController {
             @AuthMember Member member,
             @PathVariable(value = "post_id") Long postId){
         log.info("[ExchangeController][exchangeRemove]:{}",member.toString());
-        postRemoveService.removeExchange(member);
+        postRemoveService.removeExchange(postId);
         return new ResponseEntity<>("cancel deal", HttpStatus.OK);
     }
 

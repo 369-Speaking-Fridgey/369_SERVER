@@ -42,7 +42,7 @@ public class PostController {
             @AuthMember Member member,
             @PathVariable(value = "postId") Long postId){
         log.info("[PostController][postRemove]:{}",postId);
-        postRemoveService.removePost(member, postId);
+        postRemoveService.removePost(postId);
         return new ResponseEntity<>("delete post",HttpStatus.OK);
     }
 
