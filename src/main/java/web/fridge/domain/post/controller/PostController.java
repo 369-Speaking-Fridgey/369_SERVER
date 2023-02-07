@@ -27,7 +27,6 @@ public class PostController {
     private final PostRegisterService postRegisterService;
     private final PostRemoveService postRemoveService;
 
-    //post 식재료 거래 포스트 등록
     @PostMapping
     public ResponseEntity<Post> postAdd(
             @AuthMember Member member,

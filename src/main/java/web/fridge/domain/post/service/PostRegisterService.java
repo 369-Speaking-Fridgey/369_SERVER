@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import web.fridge.domain.image.Image;
 import web.fridge.domain.image.ImageService;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.dto.PostDetails;
@@ -19,10 +20,10 @@ public class PostRegisterService {
     private final PostRepository postRepository;
     private final ImageService imageService;
 
-    @Transactional
+    @Transactional //upload pre signed
     public Post addPost(Member member,MultipartFile multipartFile, PostDetails postDetails) throws IOException {
-        imageService.upload(multipartFile); //upload pre signed & Member save
-        Post post = new Post().initPost(member,postDetails);
+        Image image = imageService.upload(multipartFile);
+        Post post = new Post().initPost(member,postDetails,image);
         postRepository.save(post);
         return post;
     }

@@ -1,5 +1,6 @@
 package web.fridge.domain.post.entity;
 
+import lombok.Builder;
 import web.fridge.domain.image.Image;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.dto.PostDetails;
@@ -63,8 +64,9 @@ public class Post extends BaseTimeEntity {
     @Column(length = 225)
     private String address;
 
-    public Post initPost(Member member, PostDetails postDetails){
+    public Post initPost(Member member, PostDetails postDetails, Image image){
         this.member = member;
+        this.image = image;
         this.title = postDetails.getTitle();
         this.contents = postDetails.getContents();
         this.price = postDetails.getPrice();
