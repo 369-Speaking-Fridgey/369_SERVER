@@ -10,7 +10,7 @@ import web.fridge.domain.post.repository.PostRepository;
 public class PostModifyService {
     private final PostRepository postRepository;
 
-    public void modifyDealStatus(){
+    public void modifyExchangeStatus(){
 
     }
 

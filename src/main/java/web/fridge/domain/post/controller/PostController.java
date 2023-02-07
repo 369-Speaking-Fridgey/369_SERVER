@@ -26,9 +26,8 @@ public class PostController {
     private final PostFindService postFindService;
     private final PostRegisterService postRegisterService;
     private final PostRemoveService postRemoveService;
-    private final PostModifyService postModifyService;
 
-    //post 식재료 거래 등록
+    //post 식재료 거래 포스트 등록
     @PostMapping
     public ResponseEntity<Post> postAdd(
             @AuthMember Member member,
@@ -39,17 +38,17 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    //delete 식재료 거래 삭제 apo
+    //delete 식재료 거래 삭제 포스트
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> postRemove(
             @AuthMember Member member,
             @PathVariable(value = "postId") Long postId){
         log.info("[PostController][postRemove]:{}",postId);
-        postRemoveService.removePost(postId);
+        postRemoveService.removePost(member, postId);
         return new ResponseEntity<>("delete post",HttpStatus.OK);
     }
 
-    //get 위치 기반 식재료 거래 목록 반환 사용자 위치(region)기반 식재료 조회
+    //get 위치 기반 식재료 거래 목록 반환 사용자 위치(region)기반 식재료 포스트 조회
     @GetMapping
     public ResponseEntity<String> postByRegionList(
             @AuthMember Member member){
@@ -59,48 +58,12 @@ public class PostController {
 
     }
 
-    //get 사용자별 거래 조회
-    @GetMapping("/member")
-    public ResponseEntity<String> postByMemberList(
-            @AuthMember Member member){
-        log.info("[PostController][PostByMemberList]:{}",member.getMemberId().toString());
-        postFindService.findPostByMember(member);
-        return new ResponseEntity<>("get post by Member", HttpStatus.OK);
-    }
-
-    //post 식재료 거래 요청
-    @PostMapping("/deal")
-    public ResponseEntity<String> dealAdd(
-            @AuthMember Member member){
-        log.info("[PostController][dealAdd]:{}",member.toString());
-        postRegisterService.addDeal(member);
-        return new ResponseEntity<>("send deal", HttpStatus.OK);
-    }
-
-    //delete 식재료 거래 취소
-    @DeleteMapping("/deal")
-    public ResponseEntity<String> dealRemove(
-            @AuthMember Member member){
-        log.info("[PostController][dealRemove]:{}",member.toString());
-        postRemoveService.removeDeal(member);
-        return new ResponseEntity<>("cancel deal", HttpStatus.OK);
-    }
-
-    //put 식재료 거래완료
-    @PutMapping("/deal")
-    public ResponseEntity<String> dealStatusModify(
-            @AuthMember Member member){
-        log.info("[PostController][dealStatusModify]:{}",member.toString());
-        postModifyService.modifyDealStatus();
-        return new ResponseEntity<>("complete deal", HttpStatus.OK);
-    }
-
-    //Get 거래 단건 조회
+    //Get 거래 포스트 단건 조회
     @GetMapping("/{postId}")
     public ResponseEntity<String> postByPostID(
             @AuthMember Member member,
             @PathVariable(value = "postId") Long postId){
-        postFindService.findPostByPostID();
+        postFindService.findPostByPostID(member,postId);
         return new ResponseEntity<>("get a post By postID",HttpStatus.OK);
     }
 }

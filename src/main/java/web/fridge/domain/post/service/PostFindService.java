@@ -3,6 +3,7 @@ package web.fridge.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.repository.PostRepository;
 
 @Service
@@ -11,11 +12,15 @@ public class PostFindService {
 
     private final PostRepository postRepository;
 
-    public void findPostByRegion(){
+    public void findPostByRegion(Member member){
 
     }
 
-    public void findPostByMember(){
+    public void findExchangeByMember(Member member){
+
+    }
+
+    public void findPostByPostID(Member member, Long postId){
 
     }
 }
