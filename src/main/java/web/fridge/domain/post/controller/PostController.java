@@ -37,7 +37,6 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    //delete 식재료 거래 삭제 포스트
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> postRemove(
             @AuthMember Member member,
