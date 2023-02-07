@@ -2,6 +2,7 @@ package web.fridge.domain.post.entity;
 
 import web.fridge.domain.image.Image;
 import web.fridge.domain.member.entity.Member;
+import web.fridge.domain.post.dto.PostDetails;
 import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
@@ -62,6 +63,18 @@ public class Post extends BaseTimeEntity {
     @Column(length = 225)
     private String address;
 
+    public Post initPost(Member member, PostDetails postDetails){
+        this.member = member;
+        this.title = postDetails.getTitle();
+        this.contents = postDetails.getContents();
+        this.price = postDetails.getPrice();
+        this.exchangeAt = postDetails.getExchangeAt();
+        this.requestAt = postDetails.getRequestAt();
+        this.exchangeAt = postDetails.getExchangeAt();
+        this.method = postDetails.getMethod();
+        this.address = postDetails.getAddress();
+        return this;
+    }
 
 
 }
