@@ -1,6 +1,7 @@
 package web.fridge.domain.post.entity;
 
 import lombok.Builder;
+import lombok.Getter;
 import web.fridge.domain.image.Image;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.dto.PostDetails;
@@ -9,6 +10,7 @@ import web.fridge.global.entity.BaseTimeEntity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "post")
 public class Post extends BaseTimeEntity {

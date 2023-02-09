@@ -53,14 +53,13 @@ public class PostController {
         log.info("[PostController][PostByRegionList]:{}",member.getRegion().toString());
         postFindService.findPostByRegion(member);
         return new ResponseEntity<>("get post by region", HttpStatus.OK);
-
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<String> postByPostID(
+    public ResponseEntity<Post> postByPostID(
             @AuthMember Member member,
             @PathVariable(value = "postId") Long postId){
-        postFindService.findPostByPostID(member,postId);
-        return new ResponseEntity<>("get a post By postID",HttpStatus.OK);
+        Post post = postFindService.findPostByPostID(member,postId);
+        return new ResponseEntity<>(post,HttpStatus.OK);
     }
 }
