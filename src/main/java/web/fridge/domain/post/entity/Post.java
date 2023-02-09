@@ -23,11 +23,6 @@ public class Post extends BaseTimeEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "request_id")
     private Member member;
-    //`response_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "buyer_id")
-    private Member buyer;
 
     //`image_id`	BIGINT	NOT NULL,
     @OneToOne(optional = false)
@@ -72,9 +67,10 @@ public class Post extends BaseTimeEntity {
         this.price = postDetails.getPrice();
         this.exchangeAt = postDetails.getExchangeAt();
         this.requestAt = postDetails.getRequestAt();
-        this.exchangeAt = postDetails.getExchangeAt();
+        this.expiredAt = postDetails.getExpiredAt();
         this.method = postDetails.getMethod();
         this.address = postDetails.getAddress();
+
         return this;
     }
 

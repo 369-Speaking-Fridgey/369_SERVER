@@ -13,8 +13,11 @@ public class PostDetails {
     public String contents;
     public Long price;
 
+
     public LocalDateTime expiredAt;
+
     public LocalDateTime requestAt;
+
     public LocalDateTime exchangeAt;
 
     public String method;
