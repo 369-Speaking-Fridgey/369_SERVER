@@ -26,7 +26,7 @@ public class PostFindService {
        return exchangeRepository.findAllByMember(member);
     }
 
-    public void findPostByPostID(Member member, Long postId){
-        Post post = postRepository.findByPostId(postId);
+    public Post findPostByPostID(Member member, Long postId){
+        return postRepository.findByPostId(postId);
     }
 }
