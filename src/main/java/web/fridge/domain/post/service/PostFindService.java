@@ -8,7 +8,6 @@ import web.fridge.domain.post.entity.Exchange;
 import web.fridge.domain.post.entity.Post;
 import web.fridge.domain.post.repository.ExchangeRepository;
 import web.fridge.domain.post.repository.PostRepository;
-import web.fridge.domain.region.Region;
 import web.fridge.global.enums.Status;
 
 import java.util.List;
@@ -46,4 +45,16 @@ public class PostFindService {
     public Post findPostByPostID(Long postId){
         return postRepository.findByPostId(postId);
     }
+
+    public Boolean isExchangeExist(Member member, Long postId){
+        List<Exchange> exchanges = exchangeRepository.findAllByMember(member);
+        Post post = postRepository.findByPostId(postId);
+        for(Exchange exchange : exchanges){
+           if( exchange.getMember() == post.getMember())
+               return Boolean.TRUE;
+        };
+        return Boolean.FALSE;
+
+    }
+
 }

@@ -28,30 +28,39 @@ public class ExchangeController {
 
     @GetMapping("/member/complete")
     public ResponseEntity<List> exchangeByMemberCompleteList(
-            @AuthMember Member member
-        ){
+            @AuthMember Member member){
         log.info("[ExchangeController][exchangeByMemberCompleteList]:{}",member.getMemberId().toString());
         List<Exchange> exchanges = postFindService.findExchangeByMemberStatusComplete(member);
         return new ResponseEntity<>(exchanges, HttpStatus.OK);
     }
 
-    @GetMapping("/member/reserved") //by status reserved
+    //거래 중인 것과 거래 신청한 것이 함께 보여줄건지 따로 보여줄 건지?
+    //차이는 탭이 2개로 나눌건지 3개로 나눌 건지 입니다 (거래완료/거래 신청 내역) 혹은 (거래중/예약중/거래완료)
+    @GetMapping("/member/reserved")
     public ResponseEntity<List<Exchange>> exchangeByMemberReservedList(
             @AuthMember Member member){
         log.info("[ExchangeController][exchangeByMemberReservedList]:{}",member.getMemberId().toString());
         List<Exchange> exchanges = postFindService.findExchangeByMemberStatusReserved(member);
         return new ResponseEntity<>(exchanges,HttpStatus.OK);
     }
-
+    
     @PostMapping("/{post_id}")
-    public ResponseEntity<Exchange> exchangeAdd(
+    public ResponseEntity<?> exchangeAdd(
             @AuthMember Member member,
             @PathVariable(value = "post_id") Long postId){
         log.info("[ExchangeController][exchangeAdd]:{}",postId);
-        Exchange exchange = postRegisterService.addExchange(postId, member);
-        return new ResponseEntity<>(exchange, HttpStatus.OK);
+        Boolean isExchangExist = postFindService.isExchangeExist(member,postId);
+        if(isExchangExist == Boolean.TRUE){
+            return new ResponseEntity<>("exchange is already exist", HttpStatus.OK);
+        } else {
+            Exchange exchange = postRegisterService.addExchange(postId, member);
+            return new ResponseEntity<>(exchange, HttpStatus.OK);
+        }
     }
 
+    //진행 중 (reserved) 인 거래 시 함부로 일방적 취소가 불가능하도록 수정
+    //완료된 거래 시 한쪽에서 지우면 다른쪽에서 보이게 가능한지?
+    //요청된 거래(inprogress)는 일방적 삭제 가능하도록 수정
     @DeleteMapping("/{exchanged_id}")
     public ResponseEntity<String> exchangeRemove(
             @AuthMember Member member,
