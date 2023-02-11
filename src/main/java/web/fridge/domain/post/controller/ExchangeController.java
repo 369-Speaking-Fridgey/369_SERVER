@@ -26,7 +26,7 @@ public class ExchangeController {
     private final PostModifyService postModifyService;
 
 
-    @GetMapping("/member/complete") //by status
+    @GetMapping("/member/complete")
     public ResponseEntity<List> exchangeByMemberCompleteList(
             @AuthMember Member member
         ){
@@ -52,13 +52,12 @@ public class ExchangeController {
         return new ResponseEntity<>(exchange, HttpStatus.OK);
     }
 
-    //delete 식재료 거래 취소
-    @DeleteMapping("/{post_id}")
+    @DeleteMapping("/{exchanged_id}")
     public ResponseEntity<String> exchangeRemove(
             @AuthMember Member member,
-            @PathVariable(value = "post_id") Long postId){
+            @PathVariable(value = "exchanged_id") Long exchangedId){
         log.info("[ExchangeController][exchangeRemove]:{}",member.toString());
-        postRemoveService.removeExchange(postId);
+        postRemoveService.removeExchange(exchangedId);
         return new ResponseEntity<>("cancel deal", HttpStatus.OK);
     }
 
