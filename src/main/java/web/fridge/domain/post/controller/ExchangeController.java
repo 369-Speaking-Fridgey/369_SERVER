@@ -29,10 +29,9 @@ public class ExchangeController {
     @GetMapping("/member/complete") //by status
     public ResponseEntity<List> exchangeByMemberCompleteList(
             @AuthMember Member member
-            //@RequestParam(required = false, name = "status") Status status
         ){
         log.info("[ExchangeController][exchangeByMemberCompleteList]:{}",member.getMemberId().toString());
-        List<Exchange> exchanges = postFindService.findExchangeByMemberStatusInprogress(member);
+        List<Exchange> exchanges = postFindService.findExchangeByMemberStatusComplete(member);
         return new ResponseEntity<>(exchanges, HttpStatus.OK);
     }
 
@@ -40,7 +39,6 @@ public class ExchangeController {
     public ResponseEntity<String> exchangeByMemberReservedList(
             @AuthMember Member member){
         log.info("[ExchangeController][exchangeByMemberReservedList]:{}",member.getMemberId().toString());
-
         return new ResponseEntity<>("",HttpStatus.OK);
     }
 
