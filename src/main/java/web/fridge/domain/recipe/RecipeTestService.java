@@ -20,14 +20,14 @@ public class RecipeTestService {
 
     private static String RankedRecipeURL="https://www.10000recipe.com/ranking/home_new.html?rtype=r&dtype=d";
 
-    @PostConstruct
+    //@PostConstruct
     public String crawlRankedRecipe() throws IOException {
 
         Document doc = Jsoup.connect(RankedRecipeURL).get();
         //log.info(doc.toString());
 
         Elements contents = doc.select("body div div div ul li[class = common_sp_list_li]");
-        log.info(contents.toString());
+        //log.info(contents.toString());
 
         for(Element content : contents){
             Elements imgContents = content.select("div a[class=common_sp_link] img");
