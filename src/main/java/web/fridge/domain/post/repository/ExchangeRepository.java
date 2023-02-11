@@ -13,6 +13,8 @@ public interface ExchangeRepository extends JpaRepository<Exchange,Long> {
 
     Exchange findByPost(Post post);
 
+    Exchange findByExchangedId(Long exchangedId);
+
     List<Exchange> findAllByMember(Member member);
 
 }

@@ -36,4 +36,9 @@ public class Exchange extends BaseTimeEntity {
         return this;
     }
 
+    public Exchange completeExchange(Exchange exchange){
+        this.status = Status.COMPLETED;
+        return this;
+    }
+
 }

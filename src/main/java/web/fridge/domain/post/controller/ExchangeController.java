@@ -9,6 +9,7 @@ import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.entity.Exchange;
 import web.fridge.domain.post.service.*;
+import web.fridge.global.enums.Status;
 
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class ExchangeController {
         return new ResponseEntity<>("",HttpStatus.OK);
     }
 
-    //post 식재료 거래 요청
     @PostMapping("/{post_id}")
     public ResponseEntity<Exchange> exchangeAdd(
             @AuthMember Member member,
@@ -63,13 +63,12 @@ public class ExchangeController {
         return new ResponseEntity<>("cancel deal", HttpStatus.OK);
     }
 
-    //put 식재료 거래 완료
-    @PutMapping("/{post_id}")
-    public ResponseEntity<String> exchangeStatusModify(
+    @PutMapping("/{exchanged_id}")
+    public ResponseEntity<Status> exchangeStatusModify(
             @AuthMember Member member,
-            @PathVariable(value = "post_id") Long postId){
-        log.info("[ExchangeController][exchangeStatusModify]:{}",member.toString());
-        postModifyService.modifyExchangeStatus();
-        return new ResponseEntity<>("complete deal", HttpStatus.OK);
+            @PathVariable(value = "exchanged_id") Long exchanged_id){
+        log.info("[ExchangeController][exchangeStatusModify]:{}",exchanged_id.toString());
+        Status status = postModifyService.modifyExchangeStatus(exchanged_id);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }
