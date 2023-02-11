@@ -15,7 +15,7 @@ public class Exchange extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long exchangeId;
+    private Long exchangedId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "requester_id")
