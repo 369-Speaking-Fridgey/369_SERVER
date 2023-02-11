@@ -34,7 +34,7 @@ public class PostController {
             @RequestPart(value = "post") PostDetails postDetails) throws IOException {
         log.info("[PostController][postAdd]:{}",member.toString());
         Post post = postRegisterService.addPost(member,multipartFile,postDetails);
-        return new ResponseEntity<>(post, HttpStatus.OK);
+        return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 
     //포스트 삭제 시 관련 거래도 삭제 되게 할건지? 다른 유저의 거래 기록 확인이 남아있어야하니까
@@ -49,7 +49,7 @@ public class PostController {
             postRemoveService.removePost(postId);
             return new ResponseEntity<>("delete post",HttpStatus.OK);
         }
-        else return new ResponseEntity<>("your not a post owner",HttpStatus.OK);
+        else return new ResponseEntity<>("your not a post owner",HttpStatus.CONFLICT);
     }
 
     //거래 완료된 포스트도 가져올 건지?

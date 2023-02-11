@@ -51,14 +51,14 @@ public class ExchangeController {
         log.info("[ExchangeController][exchangeAdd]:{}",postId);
         Boolean isExchangExist = postFindService.isExchangeExist(member,postId);
         if(isExchangExist == Boolean.TRUE){
-            return new ResponseEntity<>("exchange is already exist", HttpStatus.OK);
+            return new ResponseEntity<>("exchange is already exist", HttpStatus.CONFLICT);
         } else {
             Exchange exchange = postRegisterService.addExchange(postId, member);
-            return new ResponseEntity<>(exchange, HttpStatus.OK);
+            return new ResponseEntity<>(exchange, HttpStatus.CREATED);
         }
     }
 
-    //완료된 거래(complete) 시 한쪽에서 지우면 다른쪽에서 보이게 할지
+    //완료된 거래(complete) 시 한쪽에서 지우면 다른쪽에서 보이게 할지?
     @DeleteMapping("/{exchanged_id}")
     public ResponseEntity<String> exchangeRemove(
             @AuthMember Member member,
@@ -69,9 +69,8 @@ public class ExchangeController {
             postRemoveService.removeExchange(exchangedId);
             return new ResponseEntity<>("cancel exchange", HttpStatus.OK);
         }else if(status == Status.RESERVED){
-            return new ResponseEntity<>("exchange is reserved, cancel is not allowed",HttpStatus.OK);
+            return new ResponseEntity<>("exchange is reserved, cancel is not allowed",HttpStatus.CONFLICT);
         }else return new ResponseEntity<>("completed exchange, allowed",HttpStatus.OK);
-
     }
 
     @PutMapping("/{exchanged_id}")
