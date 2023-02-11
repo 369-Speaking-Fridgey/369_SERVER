@@ -36,10 +36,11 @@ public class ExchangeController {
     }
 
     @GetMapping("/member/reserved") //by status reserved
-    public ResponseEntity<String> exchangeByMemberReservedList(
+    public ResponseEntity<List<Exchange>> exchangeByMemberReservedList(
             @AuthMember Member member){
         log.info("[ExchangeController][exchangeByMemberReservedList]:{}",member.getMemberId().toString());
-        return new ResponseEntity<>("",HttpStatus.OK);
+        List<Exchange> exchanges = postFindService.findExchangeByMemberStatusReserved(member);
+        return new ResponseEntity<>(exchanges,HttpStatus.OK);
     }
 
     @PostMapping("/{post_id}")

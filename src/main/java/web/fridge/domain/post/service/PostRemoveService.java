@@ -30,9 +30,8 @@ public class PostRemoveService {
     }
 
     @Transactional
-    public void removeExchange(Long postId){
-        Post post = postRepository.findByPostId(postId);
-        Exchange exchange = exchangeRepository.findByPost(post);
+    public void removeExchange(Long exchangedId){
+        Exchange exchange = exchangeRepository.findByExchangedId(exchangedId);
         exchangeRepository.delete(exchange);
     }
 }
