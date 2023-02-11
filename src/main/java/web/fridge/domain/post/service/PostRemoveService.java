@@ -20,13 +20,12 @@ public class PostRemoveService {
 
     private final ImageRepository imageRepository;
 
-    @Transactional //채팅 추가 시 관련 채팅방 삭제도 해야함
+    @Transactional
     public void removePost(Long postId){
         Post post = postRepository.findByPostId(postId);
         Image image = imageRepository.findByImageId(post.getImage().getImageId());
         postRepository.delete(post);
         imageRepository.delete(image);
-        //removeExchange(postId); 포스트 삭제 시 거래도 삭제 되게 할건지 역대 거래 조회..?
     }
 
     @Transactional

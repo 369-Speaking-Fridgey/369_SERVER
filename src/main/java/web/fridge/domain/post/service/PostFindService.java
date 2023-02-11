@@ -43,7 +43,7 @@ public class PostFindService {
         return exchanges;
     }
 
-    public Post findPostByPostID(Member member, Long postId){
+    public Post findPostByPostID(Long postId){
         return postRepository.findByPostId(postId);
     }
 }
