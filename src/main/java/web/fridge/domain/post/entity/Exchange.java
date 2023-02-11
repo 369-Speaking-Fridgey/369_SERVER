@@ -1,12 +1,14 @@
 package web.fridge.domain.post.entity;
 
 
+import lombok.Getter;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.global.entity.BaseTimeEntity;
+import web.fridge.global.enums.Status;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "exchange")
 public class Exchange extends BaseTimeEntity {
@@ -23,9 +25,15 @@ public class Exchange extends BaseTimeEntity {
     @JoinColumn(name ="post_id")
     private Post post;
 
-    private LocalDateTime createdAt;
-
     @Column(length = 10)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public Exchange initExchange(Member member,Post post){
+        this.member = member;
+        this.post = post;
+        this.status = Status.INPROGRESS;
+        return this;
+    }
 
 }

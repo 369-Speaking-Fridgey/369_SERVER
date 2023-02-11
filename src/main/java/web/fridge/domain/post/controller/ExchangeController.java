@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.entity.Exchange;
-import web.fridge.domain.post.service.PostFindService;
-import web.fridge.domain.post.service.PostModifyService;
-import web.fridge.domain.post.service.PostRegisterService;
-import web.fridge.domain.post.service.PostRemoveService;
+import web.fridge.domain.post.service.*;
 
 import java.util.List;
 
@@ -28,22 +25,32 @@ public class ExchangeController {
     private final PostModifyService postModifyService;
 
 
-    @GetMapping("/member")
-    public ResponseEntity<List> exchangeByMemberList(
-            @AuthMember Member member){
-        log.info("[ExchangeController][exchangeByMemberList]:{}",member.getMemberId().toString());
-        List<Exchange> exchanges = postFindService.findExchangeByMember(member);
+    @GetMapping("/member/complete") //by status
+    public ResponseEntity<List> exchangeByMemberCompleteList(
+            @AuthMember Member member
+            //@RequestParam(required = false, name = "status") Status status
+        ){
+        log.info("[ExchangeController][exchangeByMemberCompleteList]:{}",member.getMemberId().toString());
+        List<Exchange> exchanges = postFindService.findExchangeByMemberStatusInprogress(member);
         return new ResponseEntity<>(exchanges, HttpStatus.OK);
+    }
+
+    @GetMapping("/member/reserved") //by status reserved
+    public ResponseEntity<String> exchangeByMemberReservedList(
+            @AuthMember Member member){
+        log.info("[ExchangeController][exchangeByMemberReservedList]:{}",member.getMemberId().toString());
+
+        return new ResponseEntity<>("",HttpStatus.OK);
     }
 
     //post 식재료 거래 요청
     @PostMapping("/{post_id}")
-    public ResponseEntity<String> exchangeAdd(
+    public ResponseEntity<Exchange> exchangeAdd(
             @AuthMember Member member,
             @PathVariable(value = "post_id") Long postId){
-        log.info("[ExchangeController][exchangeAdd]:{}",member.toString());
-        postRegisterService.addExchange(member);
-        return new ResponseEntity<>("send deal", HttpStatus.OK);
+        log.info("[ExchangeController][exchangeAdd]:{}",postId);
+        Exchange exchange = postRegisterService.addExchange(postId, member);
+        return new ResponseEntity<>(exchange, HttpStatus.OK);
     }
 
     //delete 식재료 거래 취소

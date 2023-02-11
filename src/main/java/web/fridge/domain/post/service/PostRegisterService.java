@@ -9,7 +9,9 @@ import web.fridge.domain.image.Image;
 import web.fridge.domain.image.ImageService;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.dto.PostDetails;
+import web.fridge.domain.post.entity.Exchange;
 import web.fridge.domain.post.entity.Post;
+import web.fridge.domain.post.repository.ExchangeRepository;
 import web.fridge.domain.post.repository.PostRepository;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class PostRegisterService {
+
+    private final ExchangeRepository exchangeRepository;
     private final PostRepository postRepository;
     private final ImageService imageService;
 
@@ -29,9 +33,11 @@ public class PostRegisterService {
     }
 
     @Transactional
-    public void addExchange(Member member){
-        //
-
+    public Exchange addExchange(Long postId, Member member){
+        Post post = postRepository.findByPostId(postId);
+        Exchange exchange = new Exchange().initExchange(member,post);
+        exchangeRepository.save(exchange);
+        return exchange;
     }
 
 
