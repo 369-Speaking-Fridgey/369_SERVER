@@ -43,7 +43,7 @@ public class ExchangeController {
         List<Exchange> exchanges = postFindService.findExchangeByMemberStatusReserved(member);
         return new ResponseEntity<>(exchanges,HttpStatus.OK);
     }
-    
+
     @PostMapping("/{post_id}")
     public ResponseEntity<?> exchangeAdd(
             @AuthMember Member member,
@@ -58,16 +58,20 @@ public class ExchangeController {
         }
     }
 
-    //진행 중 (reserved) 인 거래 시 함부로 일방적 취소가 불가능하도록 수정
-    //완료된 거래 시 한쪽에서 지우면 다른쪽에서 보이게 가능한지?
-    //요청된 거래(inprogress)는 일방적 삭제 가능하도록 수정
+    //완료된 거래(complete) 시 한쪽에서 지우면 다른쪽에서 보이게 할지
     @DeleteMapping("/{exchanged_id}")
     public ResponseEntity<String> exchangeRemove(
             @AuthMember Member member,
             @PathVariable(value = "exchanged_id") Long exchangedId){
         log.info("[ExchangeController][exchangeRemove]:{}",member.toString());
-        postRemoveService.removeExchange(exchangedId);
-        return new ResponseEntity<>("cancel deal", HttpStatus.OK);
+        Status status = postFindService.getExchangeStatus(exchangedId);
+        if(status == Status.INPROGRESS){
+            postRemoveService.removeExchange(exchangedId);
+            return new ResponseEntity<>("cancel exchange", HttpStatus.OK);
+        }else if(status == Status.RESERVED){
+            return new ResponseEntity<>("exchange is reserved, cancel is not allowed",HttpStatus.OK);
+        }else return new ResponseEntity<>("completed exchange, allowed",HttpStatus.OK);
+
     }
 
     @PutMapping("/{exchanged_id}")

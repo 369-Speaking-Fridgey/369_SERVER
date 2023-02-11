@@ -54,7 +54,11 @@ public class PostFindService {
                return Boolean.TRUE;
         };
         return Boolean.FALSE;
+    }
 
+    public Status getExchangeStatus(Long exchangedId){
+        Exchange exchange = exchangeRepository.findByExchangedId(exchangedId);
+        return exchange.getStatus();
     }
 
 }
