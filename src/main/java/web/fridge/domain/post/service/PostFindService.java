@@ -21,16 +21,25 @@ public class PostFindService {
     private final PostRepository postRepository;
     private final ExchangeRepository exchangeRepository;
 
-    public void findPostByRegion(Member member){
+    public List<Post> findPostByRegion(Member member){
         List<Post> posts = postRepository.findByMember(member);
-        Region region = member.getRegion();
-
+        posts = posts.stream()
+                .filter(post -> post.getAddress().equals(member.getRegion().getArea3()))
+                .collect(Collectors.toList());
+        return posts;
     }
 
     public List<Exchange> findExchangeByMemberStatusComplete(Member member){
         List<Exchange> exchanges = exchangeRepository.findAllByMember(member);
         exchanges = exchanges.stream()
                 .filter(b -> b.getStatus().equals(Status.COMPLETED)).collect(Collectors.toList());
+        return exchanges;
+    }
+
+    public List<Exchange> findExchangeByMemberStatusReserved(Member member){
+        List<Exchange> exchanges = exchangeRepository.findAllByMember(member);
+        exchanges = exchanges.stream()
+                .filter(b -> b.getStatus().equals(Status.RESERVED)).collect(Collectors.toList());
         return exchanges;
     }
 

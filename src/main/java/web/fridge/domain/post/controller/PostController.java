@@ -10,12 +10,10 @@ import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.dto.PostDetails;
 import web.fridge.domain.post.entity.Post;
-import web.fridge.domain.post.service.PostFindService;
-import web.fridge.domain.post.service.PostModifyService;
-import web.fridge.domain.post.service.PostRegisterService;
-import web.fridge.domain.post.service.PostRemoveService;
+import web.fridge.domain.post.service.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -45,14 +43,13 @@ public class PostController {
         postRemoveService.removePost(postId);
         return new ResponseEntity<>("delete post",HttpStatus.OK);
     }
-
-    //get 위치 기반 식재료 거래 목록 반환 사용자 위치(region)기반 식재료 포스트 조회
+    
     @GetMapping
-    public ResponseEntity<String> postByRegionList(
+    public ResponseEntity<List<Post>> postByRegionList(
             @AuthMember Member member){
         log.info("[PostController][PostByRegionList]:{}",member.getRegion().toString());
-        postFindService.findPostByRegion(member);
-        return new ResponseEntity<>("get post by region", HttpStatus.OK);
+        List<Post> posts = postFindService.findPostByRegion(member);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     @GetMapping("/{postId}")
