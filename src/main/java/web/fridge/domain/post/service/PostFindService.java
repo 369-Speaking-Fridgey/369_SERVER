@@ -47,13 +47,14 @@ public class PostFindService {
     }
 
     public Boolean isExchangeExist(Member member, Long postId){
+        Boolean isExchangedExist = Boolean.FALSE;
         List<Exchange> exchanges = exchangeRepository.findAllByMember(member);
         Post post = postRepository.findByPostId(postId);
         for(Exchange exchange : exchanges){
            if( exchange.getMember() == post.getMember())
-               return Boolean.TRUE;
+               isExchangedExist = Boolean.TRUE;
         };
-        return Boolean.FALSE;
+        return isExchangedExist;
     }
 
     public Status getExchangeStatus(Long exchangedId){
