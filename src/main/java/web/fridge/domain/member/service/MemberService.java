@@ -28,6 +28,6 @@ public class MemberService {
         if(member == post.getMember()){
             return Boolean.TRUE;
         }
-        else return Boolean.TRUE;
+        else return Boolean.FALSE;
     }
 }
