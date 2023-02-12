@@ -1,12 +1,16 @@
-package web.fridge.domain.post;
+package web.fridge.domain.post.entity;
 
+import lombok.Builder;
+import lombok.Getter;
 import web.fridge.domain.image.Image;
 import web.fridge.domain.member.entity.Member;
+import web.fridge.domain.post.dto.PostDetails;
 import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "post")
 public class Post extends BaseTimeEntity {
@@ -21,11 +25,6 @@ public class Post extends BaseTimeEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "request_id")
     private Member member;
-    //`response_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "buyer_id")
-    private Member buyer;
 
     //`image_id`	BIGINT	NOT NULL,
     @OneToOne(optional = false)
@@ -62,6 +61,20 @@ public class Post extends BaseTimeEntity {
     @Column(length = 225)
     private String address;
 
+    public Post initPost(Member member, PostDetails postDetails, Image image){
+        this.member = member;
+        this.image = image;
+        this.title = postDetails.getTitle();
+        this.contents = postDetails.getContents();
+        this.price = postDetails.getPrice();
+        this.exchangeAt = postDetails.getExchangeAt();
+        this.requestAt = postDetails.getRequestAt();
+        this.expiredAt = postDetails.getExpiredAt();
+        this.method = postDetails.getMethod();
+        this.address = postDetails.getAddress();
+
+        return this;
+    }
 
 
 }

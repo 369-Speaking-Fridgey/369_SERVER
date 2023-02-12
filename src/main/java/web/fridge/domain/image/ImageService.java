@@ -22,7 +22,7 @@ public class ImageService {
     private final AmazonS3 amazonS3;
     private final ImageRepository imageRepository;
 
-    public String upload(MultipartFile multipartFile) throws IOException {
+    public Image upload(MultipartFile multipartFile) throws IOException {
 
         
         String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
@@ -37,7 +37,7 @@ public class ImageService {
         Image image = new Image().initImage(s3Url,s3FileName);
         imageRepository.save(image);
 
-        return s3Url;
+        return image;
     }
 
 

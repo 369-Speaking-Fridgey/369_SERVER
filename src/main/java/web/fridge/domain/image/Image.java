@@ -1,8 +1,11 @@
 package web.fridge.domain.image;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 
+@Getter
 @Entity
 @Table(name = "image")
 public class Image {
