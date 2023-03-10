@@ -2,8 +2,10 @@ package web.fridge.domain.food;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import web.fridge.domain.food.dto.FoodAddRequestDTO;
 import web.fridge.domain.member.entity.Member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -14,5 +16,14 @@ public class FoodService {
 
     public List<Food> foodFind(Member member) {
         return foodRepository.findAllByMember(member);
+    }
+
+    public Boolean addFood(Member member, List<FoodAddRequestDTO> requestDTOList) {
+        List<Food> foodList = new ArrayList<>();
+        for (FoodAddRequestDTO dto : requestDTOList){
+            foodList.add(dto.toEntity(member));
+        }
+        foodRepository.saveAll(foodList);
+        return Boolean.TRUE;
     }
 }
