@@ -29,4 +29,10 @@ public class FoodController {
         return new ResponseEntity<>("식재료가 등록되었습니다.", HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> foodRemove(@AuthMember Member member, @PathVariable Long id){
+        foodService.removeFood(member, id);
+        return new ResponseEntity<>("식재료가 삭제되었습니다.", HttpStatus.OK);
+    }
+
 }

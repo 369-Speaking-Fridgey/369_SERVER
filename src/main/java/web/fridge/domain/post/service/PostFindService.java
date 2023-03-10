@@ -51,7 +51,7 @@ public class PostFindService {
         List<Exchange> exchanges = exchangeRepository.findAllByMember(member);
         Post post = postRepository.findByPostId(postId);
         for(Exchange exchange : exchanges){
-           if( exchange.getMember() == post.getMember())
+           if(exchange.getMember() == post.getMember())
                isExchangedExist = Boolean.TRUE;
         };
         return isExchangedExist;
