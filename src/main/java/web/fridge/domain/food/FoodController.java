@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.food.dto.FoodAddRequestDTO;
+import web.fridge.domain.food.dto.FoodModifyRequestDTO;
 import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
 
@@ -33,6 +34,12 @@ public class FoodController {
     public ResponseEntity<?> foodRemove(@AuthMember Member member, @PathVariable Long id){
         foodService.removeFood(member, id);
         return new ResponseEntity<>("식재료가 삭제되었습니다.", HttpStatus.OK);
+    }
+
+    @PutMapping()
+    public ResponseEntity<?> foodModify(@AuthMember Member member, @RequestBody FoodModifyRequestDTO requestDTO){
+        foodService.modifyFood(member, requestDTO);
+        return new ResponseEntity<>("식재료가 수정되었습니다.", HttpStatus.OK);
     }
 
 }

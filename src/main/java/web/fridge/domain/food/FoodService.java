@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.food.dto.FoodAddRequestDTO;
+import web.fridge.domain.food.dto.FoodModifyRequestDTO;
 import web.fridge.domain.member.entity.Member;
 
 import java.util.ArrayList;
@@ -34,5 +35,10 @@ public class FoodService {
         Food food = foodRepository.findFoodByFoodIdAndMember(id, member).orElseThrow(() -> new IllegalArgumentException("해당 식재료를 찾을 수 없습니다."));
         foodRepository.delete(food);
         return Boolean.TRUE;
+    }
+
+    public void modifyFood(Member member, FoodModifyRequestDTO requestDTO) {
+        Food food = foodRepository.findFoodByFoodIdAndMember(requestDTO.getFoodId(), member).orElseThrow(() -> new IllegalArgumentException("해당 식재료를 찾을 수 없습니다."));
+        food.setFoodAttributes(requestDTO);
     }
 }
