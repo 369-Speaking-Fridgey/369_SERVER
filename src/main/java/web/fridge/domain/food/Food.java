@@ -1,7 +1,15 @@
 package web.fridge.domain.food;
 
+import com.sun.istack.NotNull;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.lang.Nullable;
+import web.fridge.domain.food.dto.FoodModifyRequestDTO;
 import web.fridge.domain.member.entity.Member;
+import web.fridge.global.entity.BaseTimeEntity;
 
 
 import javax.persistence.*;
@@ -11,39 +19,58 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "food")
-public class Food {
-    //food 테이블 20230105
-
-    //`food_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Food extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long foodId;
 
-    //`member_id`	BIGINT	NOT NULL	COMMENT 'AUTO INCREMENT PRIMARY KEY',
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    //`food_name`	VARCHAR(36)	NULL,
     @Column(length = 36)
+    @NotNull
     private String name;
 
-    //`quantity`	BIGINT	NULL,
-    private Long quantity;
+    @NotNull
+    private String quantity;
 
-    //`memo`	VARCHAR(255)	NULL,
+    @Nullable
     @Column(length = 225)
     private String memo;
 
-    //`type`	VARCHAR(36)	NULL	COMMENT 'check(ETC, MEET, VEGE, MILK, FROZEN)',
+    @NotNull
     @Column(length = 36)
     private String type;
 
-    //`created_at`	DATETIME	NULL	COMMENT 'current_timestamp'
-    @CreatedDate
-    private LocalDateTime createdAt;
+    @NotNull
+    @Column(length = 45)
+    private String freezeType;
 
-    //`expiry_date`	DATETIME	NULL
-    private LocalDateTime expiredAt;
+    @NotNull
+    @Column(length = 45)
+    private LocalDateTime expiryDate;
 
+    @Builder
+    public Food(Long foodId, Member member, String name, String quantity, String memo, String type, String freezeType, LocalDateTime expiryDate) {
+        this.foodId = foodId;
+        this.member = member;
+        this.name = name;
+        this.quantity = quantity;
+        this.memo = memo;
+        this.type = type;
+        this.freezeType = freezeType;
+        this.expiryDate = expiryDate;
+    }
+
+    public void setFoodAttributes(FoodModifyRequestDTO requestDTO){
+        this.name = requestDTO.getName();
+        this.quantity = requestDTO.getMemo();
+        this.memo = requestDTO.getMemo();
+        this.type = requestDTO.getType();
+        this.freezeType = requestDTO.getFreezeType();
+        this.expiryDate = requestDTO.getExpiryDate();
+    }
 }
