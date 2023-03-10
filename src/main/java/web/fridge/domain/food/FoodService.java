@@ -37,6 +37,7 @@ public class FoodService {
         return Boolean.TRUE;
     }
 
+    @Transactional
     public void modifyFood(Member member, FoodModifyRequestDTO requestDTO) {
         Food food = foodRepository.findFoodByFoodIdAndMember(requestDTO.getFoodId(), member).orElseThrow(() -> new IllegalArgumentException("해당 식재료를 찾을 수 없습니다."));
         food.setFoodAttributes(requestDTO);

@@ -36,7 +36,7 @@ public class FoodController {
         return new ResponseEntity<>("식재료가 삭제되었습니다.", HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<?> foodModify(@AuthMember Member member, @RequestBody FoodModifyRequestDTO requestDTO){
         foodService.modifyFood(member, requestDTO);
         return new ResponseEntity<>("식재료가 수정되었습니다.", HttpStatus.OK);
