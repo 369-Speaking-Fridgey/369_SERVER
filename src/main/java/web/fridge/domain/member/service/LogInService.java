@@ -6,11 +6,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.member.repository.MemberRepository;
 import web.fridge.domain.region.RegionRepository;
-import web.fridge.global.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtProvider;
 
 @Service
 @RequiredArgsConstructor

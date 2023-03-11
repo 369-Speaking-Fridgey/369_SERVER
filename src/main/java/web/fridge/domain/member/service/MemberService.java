@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.post.entity.Post;
 import web.fridge.domain.post.repository.PostRepository;
-import web.fridge.global.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtProvider;
 
 @Service
 @RequiredArgsConstructor
