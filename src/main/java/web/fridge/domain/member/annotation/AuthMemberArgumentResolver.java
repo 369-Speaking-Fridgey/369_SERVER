@@ -10,7 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.member.repository.MemberRepository;
-import web.fridge.global.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtProvider;
 
 import javax.servlet.http.HttpServletRequest;
 

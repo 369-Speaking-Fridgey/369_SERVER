@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import web.fridge.global.jwt.JwtAuthenticationFilter;
-import web.fridge.global.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtProvider;
 
 @Configuration
 @EnableWebSecurity

@@ -1,4 +1,4 @@
-package web.fridge.global.jwt;
+package web.fridge.domain.jwt;
 
 public class JwtTokenProvider {
 }

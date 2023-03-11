@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ImageService {
 
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${cloud.aws.s3.bucket.name}")
     private String bucket;
 
     private final AmazonS3 amazonS3;
