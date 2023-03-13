@@ -25,6 +25,16 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - run: touch ./src/main/resources/application.yml
       - run: echo "${{secrets.APPLICATION}}" > ./src/main/resources/application.yml
@@ -32,3 +42,4 @@ jobs:
         with:
           name: application.yml
           path: ./src/main/resources/application.yml
+          
