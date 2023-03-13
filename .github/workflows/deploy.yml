@@ -46,6 +46,12 @@ jobs:
         with:
           name: application.yml
           path: ./src/main/resources/application.yml
+        
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        
+      - name: Build with Gradle
+        run: ./gradlew build
       
       # docker cli 플러그인인 buildx 설치. 후에 도커를 빌드할 수 있게 해줌
       - name: Set up Docker Buildx
