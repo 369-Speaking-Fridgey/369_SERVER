@@ -35,11 +35,36 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-
+      
+      
       - run: touch ./src/main/resources/application.yml
-      - run: echo "${{secrets.APPLICATION}}" > ./src/main/resources/application.yml
+      - name: create application.yml
+        run: echo "${{secrets.APPLICATION}}" > ./src/main/resources/application.yml
+        
+      
       - uses: actions/upload-artifact@v2
         with:
           name: application.yml
           path: ./src/main/resources/application.yml
+      
+      # docker cli 플러그인인 buildx 설치. 후에 도커를 빌드할 수 있게 해줌
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1 
+      
+      # dockerhub에 이미지를 업로드 하기 위해 도커 로그인
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # dockerhub name
+          password: ${{ secrets.DOCKERHUB_TOKEN }} # dockerhub password
+          
+      # docker 이미지를 생성하고 dockerhub에 푸쉬
+      - name: Proxy Build And Push
+        uses: docker/build-push-action@v2 
+        with:
+          context: ./dir 			# dockerfile이 있는 위치랑 맞춰주자
+          file: ./dir/Dockerfile	# 빌드할 Dockerfile이 있는 디렉토리
+          platforms: linux/amd64	# 빌드할 때 사용할 환경.
+          push: true				# Dockerhub 푸쉬 여부
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-web	# docker 이미지 이름
           
