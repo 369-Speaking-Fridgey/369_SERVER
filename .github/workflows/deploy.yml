@@ -84,6 +84,6 @@ jobs:
           script: |
             sudo docker rm -f fridge-api-springboot
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fridge-api-springboot
-            sudo docker run -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/fridge-api-springboot
+            sudo docker run -d -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/fridge-api-springboot
             
           
