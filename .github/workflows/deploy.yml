@@ -10,7 +10,7 @@ name: Spring Boot & Gradle & Docker -> Speaking Fridge Server Deploy
 on:
   push:
     branches:
-      - feature/setting
+      - main
 
 permissions:
   contents: read
