@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.member.repository.MemberRepository;
-import web.fridge.domain.region.RegionRepository;
 import web.fridge.domain.jwt.JwtProvider;
 
 @Service
@@ -16,7 +15,6 @@ import web.fridge.domain.jwt.JwtProvider;
 public class LogInService {
 
     private final MemberRepository memberRepository;
-    private final RegionRepository regionRepository;
     private final JwtProvider jwtProvider;
 
     public ResponseEntity<String> saveKakaoMember(JSONObject kakaoRequest) {
@@ -26,9 +24,8 @@ public class LogInService {
 
         Member member = Member.builder()
                 .email(kakaoAccountInfo.get("email").toString())
-                .nickname(kakaoProfileInfo.get("nickname").toString())
+                .name(kakaoProfileInfo.get("nickname").toString())
                 .provider("KAKAO")
-                .region(regionRepository.findById(Long.valueOf(1141010400)).get()) // TODO: 수정해야함
                 .profile(kakaoProfileInfo.get("profile_image_url").toString())
                 .build();
 

@@ -3,8 +3,6 @@ package web.fridge.domain.member.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import web.fridge.domain.region.Region;
-import web.fridge.global.entity.BaseTimeEntity;
 
 import javax.persistence.*;
 
@@ -17,12 +15,8 @@ public class Member{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "region_id")
-    private Region region;
-
     @Column(length = 64)
-    private String nickname;
+    private String name;
 
     @Column(length = 64)
     private String provider;
@@ -34,9 +28,8 @@ public class Member{
     private String profile;
 
     @Builder
-    public Member(Region region, String nickname, String provider, String email, String profile) {
-        this.region = region;
-        this.nickname = nickname;
+    public Member(String name, String provider, String email, String profile) {
+        this.name = name;
         this.provider = provider;
         this.email = email;
         this.profile = profile;
