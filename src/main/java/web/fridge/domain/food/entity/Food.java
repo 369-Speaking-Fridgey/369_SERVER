@@ -1,4 +1,4 @@
-package web.fridge.domain.food;
+package web.fridge.domain.food.entity;
 
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
@@ -27,8 +27,8 @@ public class Food extends BaseTimeEntity {
     private Long foodId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "fridge_id")
+    private Fridge fridge;
 
     @Column(length = 36)
     @NotNull
@@ -54,9 +54,9 @@ public class Food extends BaseTimeEntity {
     private LocalDateTime expiryDate;
 
     @Builder
-    public Food(Long foodId, Member member, String name, String quantity, String memo, String type, String freezeType, LocalDateTime expiryDate) {
+    public Food(Long foodId, Fridge fridge, String name, String quantity, String memo, String type, String freezeType, LocalDateTime expiryDate) {
         this.foodId = foodId;
-        this.member = member;
+        this.fridge = fridge;
         this.name = name;
         this.quantity = quantity;
         this.memo = memo;

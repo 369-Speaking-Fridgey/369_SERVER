@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.food.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.dto.FoodModifyRequestDTO;
+import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.member.entity.Member;
 
 import java.util.ArrayList;
