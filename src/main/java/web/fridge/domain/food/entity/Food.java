@@ -5,15 +5,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.Nullable;
-import web.fridge.domain.food.dto.FoodModifyRequestDTO;
-import web.fridge.domain.member.entity.Member;
 import web.fridge.global.entity.BaseTimeEntity;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -65,12 +61,4 @@ public class Food extends BaseTimeEntity {
         this.expiryDate = expiryDate;
     }
 
-    public void setFoodAttributes(FoodModifyRequestDTO requestDTO){
-        this.name = requestDTO.getName();
-        this.quantity = requestDTO.getMemo();
-        this.memo = requestDTO.getMemo();
-        this.type = requestDTO.getType();
-        this.freezeType = requestDTO.getFreezeType();
-        this.expiryDate = requestDTO.getExpiryDate();
-    }
 }

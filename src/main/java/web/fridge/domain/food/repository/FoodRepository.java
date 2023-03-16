@@ -1,4 +1,4 @@
-package web.fridge.domain.food;
+package web.fridge.domain.food.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import web.fridge.domain.food.entity.Food;

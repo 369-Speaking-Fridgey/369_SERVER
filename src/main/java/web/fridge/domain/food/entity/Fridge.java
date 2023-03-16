@@ -20,6 +20,10 @@ public class Fridge {
     @NotNull
     private String name;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private FridgeType type;
+
     @Builder
     public Fridge(String fridgeId, String name) {
         this.fridgeId = fridgeId;
