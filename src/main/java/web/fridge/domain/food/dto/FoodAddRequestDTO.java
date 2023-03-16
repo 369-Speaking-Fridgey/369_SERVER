@@ -20,7 +20,6 @@ public class FoodAddRequestDTO {
     public Food toEntity(Member member) {
         return Food.builder()
                 .name(this.getName())
-                .member(member)
                 .quantity(this.getQuantity())
                 .type(this.getType())
                 .freezeType(this.getFreezeType())
