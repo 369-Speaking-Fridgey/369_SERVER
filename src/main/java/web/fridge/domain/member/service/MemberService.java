@@ -5,14 +5,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import web.fridge.domain.member.entity.Member;
-import web.fridge.domain.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtService;
 
 @Service
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final JwtProvider jwtProvider;
+    private final JwtService jwtProvider;
 
     public ResponseEntity<?> createTestJwt(Long memberId) {
         HttpHeaders httpHeaders = new HttpHeaders();

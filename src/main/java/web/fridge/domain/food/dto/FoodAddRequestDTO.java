@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import web.fridge.domain.food.entity.Food;
+import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
 import java.time.LocalDateTime;
@@ -17,10 +18,9 @@ public class FoodAddRequestDTO {
     private String freezeType;
     private LocalDateTime expiryDate;
 
-    public Food toEntity(Member member) {
+    public Food toEntity() {
         return Food.builder()
                 .name(this.getName())
-                .member(member)
                 .quantity(this.getQuantity())
                 .type(this.getType())
                 .freezeType(this.getFreezeType())

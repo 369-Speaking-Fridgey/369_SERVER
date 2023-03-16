@@ -10,7 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.member.repository.MemberRepository;
-import web.fridge.domain.jwt.JwtProvider;
+import web.fridge.domain.jwt.JwtService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class AuthMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final JwtProvider jwtProvider;
+    private final JwtService jwtProvider;
     private final MemberRepository memberRepository;
 
     @Override
