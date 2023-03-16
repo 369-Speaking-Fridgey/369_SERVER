@@ -3,10 +3,9 @@ package web.fridge.domain.food.dto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import web.fridge.domain.food.Food;
+import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.member.entity.Member;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter

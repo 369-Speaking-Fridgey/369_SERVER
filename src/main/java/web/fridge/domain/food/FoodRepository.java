@@ -1,6 +1,7 @@
 package web.fridge.domain.food;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.member.entity.Member;
 
 import java.util.List;

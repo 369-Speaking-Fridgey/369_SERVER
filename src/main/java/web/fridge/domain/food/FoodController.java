@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.food.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.dto.FoodModifyRequestDTO;
+import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.member.annotation.AuthMember;
 import web.fridge.domain.member.entity.Member;
 
