@@ -11,7 +11,4 @@ import web.fridge.domain.member.entity.Member;
 public class FridgeService {
     private final FridgeRepository fridgeRepository;
 
-    public Fridge makePrivateMemberFridge(Member member){
-
-    }
 }

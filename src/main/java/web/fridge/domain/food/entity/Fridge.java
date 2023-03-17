@@ -25,8 +25,9 @@ public class Fridge {
     private FridgeType type;
 
     @Builder
-    public Fridge(String fridgeId, String name) {
+    public Fridge(String fridgeId, String name,  FridgeType type) {
         this.fridgeId = fridgeId;
         this.name = name;
+        this.type = type;
     }
 }
