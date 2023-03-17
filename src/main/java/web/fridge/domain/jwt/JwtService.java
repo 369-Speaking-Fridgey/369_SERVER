@@ -22,7 +22,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public class JwtProvider {
+public class JwtService {
 
     private final MemberRepository memberRepository;
     // private final RedisService redisService;
@@ -57,13 +57,11 @@ public class JwtProvider {
         return this.createToken(memberRepository.findById(memberId).get().getEmail(), accessTokenValidTime);
     }
 
-    /*
     public String createRefreshToken(String email){
         String refreshToken = createToken(email, refreshTokenValidTime);
-        redisService.setValues(email, refreshToken, Duration.ofMillis(refreshTokenValidTime));
+        // redisService.setValues(email, refreshToken, Duration.ofMillis(refreshTokenValidTime));
         return refreshToken;
     }
-     */
 
     public Authentication getAuthentication(String token){
         Member member = memberRepository.findByEmail(getMemberInfo(token))
