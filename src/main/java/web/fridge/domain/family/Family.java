@@ -18,10 +18,6 @@ public class Family {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long familyId;
 
-    @NotNull
-    @Column(length = 64)
-    private String name;
-
     @ManyToOne
     @JoinColumn(name = "fridge_id")
     private Fridge fridge;
@@ -31,9 +27,8 @@ public class Family {
     private Member member;
 
     @Builder
-    public Family(Long familyId, String name, Fridge fridge, Member member) {
+    public Family(Long familyId, Fridge fridge, Member member) {
         this.familyId = familyId;
-        this.name = name;
         this.fridge = fridge;
         this.member = member;
     }

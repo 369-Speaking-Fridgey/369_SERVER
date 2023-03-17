@@ -43,7 +43,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
         }
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -57,7 +57,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
         }
         return memberRepository.save(member);
     }
@@ -68,7 +68,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
         }
         return memberRepository.save(member);
     }
