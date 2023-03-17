@@ -6,17 +6,27 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import web.fridge.domain.family.Family;
+import web.fridge.domain.family.FamilyRepository;
+import web.fridge.domain.food.entity.Fridge;
+import web.fridge.domain.food.entity.FridgeType;
+import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.member.controller.dto.GoogleLogInRequestDTO;
 import web.fridge.domain.member.controller.dto.NaverLogInRequestDTO;
 import web.fridge.domain.member.entity.Member;
 import web.fridge.domain.member.repository.MemberRepository;
 import web.fridge.domain.jwt.JwtService;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LogInService {
 
+    // TODO: (리팩토링) 반복되는 코드 줄이기
     private final MemberRepository memberRepository;
+    private final FridgeRepository fridgeRepository;
+    private final FamilyRepository familyRepository;
     private final JwtService jwtProvider;
 
     public ResponseEntity<String> saveKakaoMember(JSONObject kakaoRequest) {
@@ -30,8 +40,11 @@ public class LogInService {
                 .provider("KAKAO")
                 .profile(kakaoProfileInfo.get("profile_image_url").toString())
                 .build();
-
-        Member savedMember = memberRepository.save(member);
+        List<Family> familyList = familyRepository.findByMember(member);
+        if (familyList.isEmpty()) {
+            Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
+            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+        }
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Authorization", jwtProvider.createAccessToken(member.getMemberId()));
@@ -41,12 +54,23 @@ public class LogInService {
     public Member googleLogIn(GoogleLogInRequestDTO requestDTO) {
         Member member = memberRepository.findByEmail(requestDTO.getEmail())
                 .orElse(requestDTO.toEntity());
+        List<Family> familyList = familyRepository.findByMember(member);
+        if (familyList.isEmpty()) {
+            Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
+            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+        }
         return memberRepository.save(member);
     }
 
     public Member naverLogIn(NaverLogInRequestDTO requestDTO) {
         Member member = memberRepository.findByEmail(requestDTO.getEmail())
                 .orElse(requestDTO.toEntity());
+        List<Family> familyList = familyRepository.findByMember(member);
+        if (familyList.isEmpty()) {
+            Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
+            Family family = familyRepository.save(Family.builder().name(member.getName()).member(member).fridge(fridge).build());
+        }
         return memberRepository.save(member);
     }
+
 }
