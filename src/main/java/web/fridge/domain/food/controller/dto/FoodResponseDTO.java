@@ -1,4 +1,4 @@
-package web.fridge.domain.food.dto;
+package web.fridge.domain.food.controller.dto;
 
 import com.sun.istack.NotNull;
 import lombok.Builder;

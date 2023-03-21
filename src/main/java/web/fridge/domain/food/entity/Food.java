@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
-import web.fridge.domain.food.dto.FoodAddRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
 import web.fridge.global.entity.BaseTimeEntity;
 
 
@@ -60,6 +60,15 @@ public class Food extends BaseTimeEntity {
         this.type = type;
         this.freezeType = freezeType;
         this.expiryDate = expiryDate;
+    }
+
+    public void update(FoodEditRequestDTO dto){
+        this.name = dto.getName();
+        this.type = dto.getType();
+        this.quantity = dto.getQuantity();
+        this.memo = dto.getMemo();
+        this.freezeType = dto.getFreezeType();
+        this.expiryDate = dto.getExpiryDate();
     }
 
 }

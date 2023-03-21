@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.fridge.domain.food.dto.FoodAddRequestDTO;
-import web.fridge.domain.food.dto.FoodResponseDTO;
+import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodResponseDTO;
 import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.food.service.FoodService;
 import web.fridge.domain.member.annotation.AuthMember;
@@ -36,9 +37,21 @@ public class FoodController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> foodAdd(@AuthMember Member member, @RequestBody List<FoodAddRequestDTO> requestDTOList){
+    public ResponseEntity<?> foodListAdd(@AuthMember Member member, @RequestBody List<FoodAddRequestDTO> requestDTOList){
         List<Food> foodList = foodService.addFood(requestDTOList);
         return new ResponseEntity<>("식재료를 저장했습니다.", HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{foodId}")
+    public ResponseEntity<?> foodRemove(@AuthMember Member member, @PathVariable Long foodId){
+        foodService.removeFood(foodId);
+        return new ResponseEntity<>("정상적으로 삭제되었습니다.", HttpStatus.OK);
+    }
+
+    @PutMapping()
+    public ResponseEntity<?> foodEdit(@AuthMember Member member, @RequestBody FoodEditRequestDTO requestDTO){
+        Food food = foodService.modifyFood(requestDTO);
+        return new ResponseEntity<>(new FoodResponseDTO(food), HttpStatus.OK);
     }
 
 }

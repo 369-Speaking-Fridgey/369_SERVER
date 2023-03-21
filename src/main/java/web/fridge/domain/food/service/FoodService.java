@@ -2,7 +2,9 @@ package web.fridge.domain.food.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import web.fridge.domain.food.dto.FoodAddRequestDTO;
+import org.springframework.transaction.annotation.Transactional;
+import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
 import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.repository.FoodRepository;
@@ -28,6 +30,7 @@ public class FoodService {
                 .orElseThrow(() -> new IllegalArgumentException("음식을 찾을 수 없습니다."));
     }
 
+    @Transactional
     public List<Food> addFood(List<FoodAddRequestDTO> requestDTOList) {
         List<Food> foodList = new ArrayList<>();
         Fridge fridge = fridgeRepository.findById(requestDTOList.get(0).getFridgeId())
@@ -44,5 +47,18 @@ public class FoodService {
                     .build());
         }
         return foodList;
+    }
+
+    @Transactional
+    public void removeFood(Long foodId) {
+        foodRepository.deleteById(foodId);
+    }
+
+    @Transactional
+    public Food modifyFood(FoodEditRequestDTO requestDTO) {
+        Food food = foodRepository.findById(requestDTO.getFoodId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 식재료입니다."));
+        food.update(requestDTO);
+        return food;
     }
 }

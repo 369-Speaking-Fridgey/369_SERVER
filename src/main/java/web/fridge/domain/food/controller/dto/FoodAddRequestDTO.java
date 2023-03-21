@@ -1,13 +1,7 @@
-package web.fridge.domain.food.dto;
+package web.fridge.domain.food.controller.dto;
 
-import com.sun.istack.NotNull;
-import lombok.Builder;
 import lombok.Getter;
-import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
-import web.fridge.domain.food.entity.Food;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
