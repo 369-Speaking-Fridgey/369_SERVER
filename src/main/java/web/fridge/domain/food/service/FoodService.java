@@ -22,7 +22,7 @@ public class FoodService {
     private final FridgeRepository fridgeRepository;
 
     public List<Food> findFoodByMemberAndFridgeId(Member member, Long fridgeId) {
-        return foodRepository.findAllByFridge_FridgeId(fridgeId);
+        return foodRepository.findAllByFridge_FridgeIdOrderByExpiryDate(fridgeId);
     }
 
     public Food findFoodDetail(Member member, Long foodId) {
@@ -43,8 +43,7 @@ public class FoodService {
                     .type(dto.getType())
                     .memo(dto.getMemo())
                     .freezeType(dto.getFreezeType())
-                    .expiryDate(dto.getExpiryDate())
-                    .build());
+                    .expiryDate(dto.getExpiryDate()).build());
         }
         return foodList;
     }
