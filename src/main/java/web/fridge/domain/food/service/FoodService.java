@@ -25,6 +25,10 @@ public class FoodService {
         return foodRepository.findAllByFridge_FridgeIdOrderByExpiryDate(fridgeId);
     }
 
+    public List<Food> findFoodByType(Long fridgeId, String type, String freezeType) {
+        return foodRepository.findAllByFridge_FridgeIdAndTypeAndFreezeTypeOrderByExpiryDate(fridgeId, type, freezeType);
+    }
+
     public Food findFoodDetail(Member member, Long foodId) {
         return foodRepository.findById(foodId)
                 .orElseThrow(() -> new IllegalArgumentException("음식을 찾을 수 없습니다."));

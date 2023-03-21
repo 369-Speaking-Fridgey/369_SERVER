@@ -30,6 +30,16 @@ public class FoodController {
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/{fridgeId}")
+    public ResponseEntity<?> foodListFindByType
+            (@AuthMember Member member, @PathVariable Long fridgeId,
+             @RequestParam(name = "type") String type, @RequestParam(name = "freeze") String freezeType)
+    {
+        List<Food> foodList = foodService.findFoodByType(fridgeId, type, freezeType);
+        List<FoodResponseDTO> responseDTOList = foodList.stream().map(FoodResponseDTO::new).collect(Collectors.toList());
+        return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
+    }
+
     @GetMapping("/{foodId}")
     public ResponseEntity<?> foodDetailFind(@AuthMember Member member, @PathVariable Long foodId){
         Food food = foodService.findFoodDetail(member, foodId);
