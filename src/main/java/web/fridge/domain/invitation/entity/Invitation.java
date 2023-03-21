@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import web.fridge.domain.family.Family;
+import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
 import javax.persistence.*;
@@ -23,18 +23,18 @@ public class Invitation {
     private InvitationStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "family_id")
-    private Family family;
+    @JoinColumn(name = "fridge_id")
+    private Fridge fridge;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
     @Builder
-    public Invitation(Long invitationId, InvitationStatus status, Family family, Member member) {
+    public Invitation(Long invitationId, InvitationStatus status, Fridge fridge, Member member) {
         this.invitationId = invitationId;
         this.status = status;
-        this.family = family;
+        this.fridge = fridge;
         this.member = member;
     }
 }

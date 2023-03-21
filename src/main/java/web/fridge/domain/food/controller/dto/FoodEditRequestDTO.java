@@ -1,19 +1,16 @@
-package web.fridge.domain.food.dto;
+package web.fridge.domain.food.controller.dto;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class FoodModifyRequestDTO {
+public class FoodEditRequestDTO {
     private Long foodId;
     private String name;
     private String quantity;
+    private String memo;
     private String type;
     private String freezeType;
-    private String memo;
     private LocalDateTime expiryDate;
 }
