@@ -21,12 +21,11 @@ public class FoodService {
     private final FoodRepository foodRepository;
     private final FridgeRepository fridgeRepository;
 
-    public List<Food> findFoodByMemberAndFridgeId(Member member, Long fridgeId) {
+    public List<Food> findFoodList(Long fridgeId, String type, String freezeType) {
+        if (type != null && freezeType != null){
+            return foodRepository.findAllByFridge_FridgeIdAndTypeAndFreezeTypeOrderByExpiryDate(fridgeId, type, freezeType);
+        }
         return foodRepository.findAllByFridge_FridgeIdOrderByExpiryDate(fridgeId);
-    }
-
-    public List<Food> findFoodByType(Long fridgeId, String type, String freezeType) {
-        return foodRepository.findAllByFridge_FridgeIdAndTypeAndFreezeTypeOrderByExpiryDate(fridgeId, type, freezeType);
     }
 
     public Food findFoodDetail(Member member, Long foodId) {

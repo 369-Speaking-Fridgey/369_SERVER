@@ -22,20 +22,12 @@ public class FoodController {
 
     private final FoodService foodService;
 
-
-    @GetMapping("/{fridgeId}")
-    public ResponseEntity<?> foodListFind(@AuthMember Member member, @PathVariable Long fridgeId){
-        List<Food> foodList = foodService.findFoodByMemberAndFridgeId(member, fridgeId);
-        List<FoodResponseDTO> responseDTOList = foodList.stream().map(FoodResponseDTO::new).collect(Collectors.toList());
-        return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
-    }
-
     @GetMapping("/{fridgeId}")
     public ResponseEntity<?> foodListFindByType
             (@AuthMember Member member, @PathVariable Long fridgeId,
              @RequestParam(name = "type") String type, @RequestParam(name = "freeze") String freezeType)
     {
-        List<Food> foodList = foodService.findFoodByType(fridgeId, type, freezeType);
+        List<Food> foodList = foodService.findFoodList(fridgeId, type, freezeType);
         List<FoodResponseDTO> responseDTOList = foodList.stream().map(FoodResponseDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
