@@ -11,7 +11,6 @@ public enum BasketStatus {
     BOUGHT("STATUS_BOUGHT", "done"),
     REPEAT("STATUS_REPEAT", "repeat");
 
-
     private final String key;
     private final String status;
 }

@@ -1,7 +1,7 @@
 package web.fridge.domain.family;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 

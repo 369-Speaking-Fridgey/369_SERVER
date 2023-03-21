@@ -1,4 +1,4 @@
-package web.fridge.domain.food.controller;
+package web.fridge.domain.food.controller.dto;
 
 import lombok.Getter;
 

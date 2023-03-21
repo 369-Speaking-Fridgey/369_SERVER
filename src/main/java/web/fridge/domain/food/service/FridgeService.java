@@ -2,13 +2,12 @@ package web.fridge.domain.food.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import web.fridge.domain.family.Family;
+import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

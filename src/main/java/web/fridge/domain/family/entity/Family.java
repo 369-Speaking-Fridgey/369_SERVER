@@ -1,11 +1,13 @@
-package web.fridge.domain.family;
+package web.fridge.domain.family.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import web.fridge.domain.family.entity.Role;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,6 +27,10 @@ public class Family {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Builder
     public Family(Long familyId, Fridge fridge, Member member) {

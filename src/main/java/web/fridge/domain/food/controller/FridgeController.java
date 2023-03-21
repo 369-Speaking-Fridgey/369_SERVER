@@ -1,10 +1,10 @@
 package web.fridge.domain.food.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import web.fridge.domain.food.controller.dto.FridgeMemberInviteDTO;
 import web.fridge.domain.food.controller.dto.FridgeResponseDTO;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.service.FridgeService;
