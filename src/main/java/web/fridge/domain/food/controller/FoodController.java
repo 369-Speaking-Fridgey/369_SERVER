@@ -31,5 +31,12 @@ public class FoodController {
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("{/foodId}")
+    public ResponseEntity<?> foodDetailFind(@AuthMember Member member, @PathVariable Long foodId){
+        Food food = foodService.findFoodDetail(member, foodId);
+        return new ResponseEntity<>(new FoodResponseDTO(food), HttpStatus.OK);
+    }
+
+    
 
 }

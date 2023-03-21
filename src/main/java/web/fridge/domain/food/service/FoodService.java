@@ -17,4 +17,8 @@ public class FoodService {
         return foodRepository.findAllByFridge_FridgeId(fridgeId);
     }
 
+    public Food findFoodDetail(Member member, Long foodId) {
+        return foodRepository.findById(foodId)
+                .orElseThrow(() -> new IllegalArgumentException("음식을 찾을 수 없습니다."));
+    }
 }
