@@ -3,10 +3,8 @@ package web.fridge.domain.food.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import web.fridge.domain.food.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.dto.FoodResponseDTO;
 import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.food.service.FoodService;
@@ -31,12 +29,16 @@ public class FoodController {
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
 
-    @GetMapping("{/foodId}")
+    @GetMapping("/{foodId}")
     public ResponseEntity<?> foodDetailFind(@AuthMember Member member, @PathVariable Long foodId){
         Food food = foodService.findFoodDetail(member, foodId);
         return new ResponseEntity<>(new FoodResponseDTO(food), HttpStatus.OK);
     }
 
-    
+    @PostMapping()
+    public ResponseEntity<?> foodAdd(@AuthMember Member member, @RequestBody List<FoodAddRequestDTO> requestDTOList){
+        List<Food> foodList = foodService.addFood(requestDTOList);
+        return new ResponseEntity<>("식재료를 저장했습니다.", HttpStatus.CREATED);
+    }
 
 }

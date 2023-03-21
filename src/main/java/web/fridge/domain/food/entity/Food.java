@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
+import web.fridge.domain.food.dto.FoodAddRequestDTO;
 import web.fridge.global.entity.BaseTimeEntity;
 
 
