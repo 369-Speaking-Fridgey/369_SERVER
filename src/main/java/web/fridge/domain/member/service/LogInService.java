@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
+import web.fridge.domain.family.entity.Role;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.entity.FridgeType;
 import web.fridge.domain.food.repository.FridgeRepository;
@@ -43,7 +44,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).role(Role.OWNER).build());
         }
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -57,7 +58,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).role(Role.OWNER).build());
         }
         return memberRepository.save(member);
     }
@@ -68,7 +69,7 @@ public class LogInService {
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).build());
+            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).role(Role.OWNER).build());
         }
         return memberRepository.save(member);
     }
