@@ -37,6 +37,6 @@ public class Family {
         this.familyId = familyId;
         this.fridge = fridge;
         this.member = member;
-        this.role = Role.MEMBER;
+        this.role = role;
     }
 }
