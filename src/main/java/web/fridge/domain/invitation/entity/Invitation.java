@@ -38,7 +38,7 @@ public class Invitation {
         this.member = member;
     }
 
-    public void changeStatusAccepted(Boolean isAccepted) {
+    public void setStatus(Boolean isAccepted) {
         if (isAccepted == Boolean.FALSE){
             this.status = InvitationStatus.REJECTED;
         }

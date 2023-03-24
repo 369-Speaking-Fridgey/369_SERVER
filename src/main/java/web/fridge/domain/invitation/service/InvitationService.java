@@ -38,13 +38,13 @@ public class InvitationService {
     }
 
     public List<Invitation> findAllInvitationsByMember(Member member) {
-        return invitationRepository.findAllByMember(member);
+        return invitationRepository.findAllByMemberAndStatus(member, InvitationStatus.IN_QUEUE);
     }
 
     public Invitation modifyInvitationStatus(Member member, InvitationAcceptDTO requestDTO) {
         Invitation invitation = invitationRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다."));
-        invitation.changeStatusAccepted(requestDTO.getIsAccepted());
+        invitation.setStatus(requestDTO.getIsAccepted());
         if (invitation.getStatus().equals(InvitationStatus.ACCEPTED)){
             Family family = familyRepository.save(Family.builder()
                             .fridge(invitation.getFridge())
