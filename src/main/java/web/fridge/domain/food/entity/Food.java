@@ -7,11 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodStatusRequestDTO;
 import web.fridge.global.entity.BaseTimeEntity;
 
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity
@@ -76,4 +78,12 @@ public class Food extends BaseTimeEntity {
         this.expiryDate = dto.getExpiryDate();
     }
 
+    public void updateStatus(FoodStatusRequestDTO requestDTO) {
+        if (Objects.equals(requestDTO.getStatus(), "CONSUMED")){
+            this.status = FoodStatus.CONSUMED;
+        }
+        else if (Objects.equals(requestDTO.getStatus(), "WASTED")){
+            this.status = FoodStatus.WASTED;
+        }
+    }
 }

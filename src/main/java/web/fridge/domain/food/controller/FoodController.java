@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodResponseDTO;
+import web.fridge.domain.food.controller.dto.FoodStatusRequestDTO;
 import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.food.service.FoodService;
 import web.fridge.domain.member.annotation.AuthMember;
@@ -47,6 +48,12 @@ public class FoodController {
     @PutMapping()
     public ResponseEntity<?> foodEdit(@AuthMember Member member, @RequestBody FoodEditRequestDTO requestDTO){
         Food food = foodService.modifyFood(requestDTO);
+        return new ResponseEntity<>(new FoodResponseDTO(food), HttpStatus.OK);
+    }
+
+    @PutMapping("/status")
+    public ResponseEntity<?> foodStatusModify(@AuthMember Member member, @RequestBody FoodStatusRequestDTO requestDTO){
+        Food food = foodService.modifyFoodStatus(requestDTO);
         return new ResponseEntity<>(new FoodResponseDTO(food), HttpStatus.OK);
     }
 
