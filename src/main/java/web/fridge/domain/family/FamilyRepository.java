@@ -16,4 +16,6 @@ public interface FamilyRepository extends JpaRepository<Family, Long> {
     Optional<Family> findByMemberAndFridge_FridgeId(Member member, Long fridgeId);
 
     Optional<Family> findByMember_MemberIdAndFridge_FridgeId(Long memberId, Long fridgeId);
+
+    List<Family> findAllByFridge_FridgeId(Long fridgeId);
 }
