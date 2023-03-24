@@ -2,6 +2,7 @@ package web.fridge.domain.invitation.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.entity.Role;
@@ -41,6 +42,7 @@ public class InvitationService {
         return invitationRepository.findAllByMemberAndStatus(member, InvitationStatus.IN_QUEUE);
     }
 
+    @Transactional
     public Invitation modifyInvitationStatus(Member member, InvitationAcceptDTO requestDTO) {
         Invitation invitation = invitationRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다."));
