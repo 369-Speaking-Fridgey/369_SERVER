@@ -52,11 +52,6 @@ public class FoodService {
     }
 
     @Transactional
-    public void removeFood(Long foodId) {
-        foodRepository.deleteById(foodId);
-    }
-
-    @Transactional
     public Food modifyFood(FoodEditRequestDTO requestDTO) {
         Food food = foodRepository.findById(requestDTO.getFoodId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 식재료입니다."));

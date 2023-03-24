@@ -44,12 +44,6 @@ public class FoodController {
         return new ResponseEntity<>("식재료를 저장했습니다.", HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{foodId}")
-    public ResponseEntity<?> foodRemove(@AuthMember Member member, @PathVariable Long foodId){
-        foodService.removeFood(foodId);
-        return new ResponseEntity<>("정상적으로 삭제되었습니다.", HttpStatus.OK);
-    }
-
     @PutMapping()
     public ResponseEntity<?> foodEdit(@AuthMember Member member, @RequestBody FoodEditRequestDTO requestDTO){
         Food food = foodService.modifyFood(requestDTO);
