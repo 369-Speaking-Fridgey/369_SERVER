@@ -46,7 +46,7 @@ public class LogInController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/naver")
     public ResponseEntity<?> naverLogIn(@RequestBody NaverLogInRequestDTO requestDTO){
         Member member = logInService.naverLogIn(requestDTO);
         OauthLogInResponseDTO responseDTO = OauthLogInResponseDTO.builder()
