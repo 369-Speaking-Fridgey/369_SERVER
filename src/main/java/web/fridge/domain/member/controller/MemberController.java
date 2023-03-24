@@ -37,5 +37,4 @@ public class MemberController {
         return new ResponseEntity<>(new MemberResponseDTO(changedMember), HttpStatus.OK);
     }
 
-
 }

@@ -1,4 +1,4 @@
-package web.fridge.domain.invitation.dto;
+package web.fridge.domain.invitation.controller.dto;
 
 import web.fridge.domain.invitation.entity.Invitation;
 

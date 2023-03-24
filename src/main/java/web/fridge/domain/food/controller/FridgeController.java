@@ -8,7 +8,7 @@ import web.fridge.domain.food.controller.dto.FridgeMemberInviteDTO;
 import web.fridge.domain.food.controller.dto.FridgeResponseDTO;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.service.FridgeService;
-import web.fridge.domain.invitation.dto.InvitationResponseDTO;
+import web.fridge.domain.invitation.controller.dto.InvitationResponseDTO;
 import web.fridge.domain.invitation.entity.Invitation;
 import web.fridge.domain.invitation.service.InvitationService;
 import web.fridge.domain.member.annotation.AuthMember;

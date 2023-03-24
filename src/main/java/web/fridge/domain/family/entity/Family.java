@@ -33,9 +33,10 @@ public class Family {
     private Role role;
 
     @Builder
-    public Family(Long familyId, Fridge fridge, Member member) {
+    public Family(Long familyId, Fridge fridge, Member member, Role role) {
         this.familyId = familyId;
         this.fridge = fridge;
         this.member = member;
+        this.role = Role.MEMBER;
     }
 }
