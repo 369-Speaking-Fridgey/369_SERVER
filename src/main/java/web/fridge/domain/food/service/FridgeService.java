@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
+import web.fridge.domain.family.entity.Role;
+import web.fridge.domain.food.controller.dto.FridgeMemberRemoveDTO;
 import web.fridge.domain.food.controller.dto.FridgeMemberWithdrawDTO;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.repository.FridgeRepository;
@@ -43,5 +45,16 @@ public class FridgeService {
         Family family = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
         familyRepository.delete(family);
+    }
+
+    public void removeFridgeMemberByOwner(Member member, FridgeMemberRemoveDTO requestDTO) throws IllegalAccessException {
+        Family ownerFamily = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
+                .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
+        if (ownerFamily.getRole() != Role.OWNER) {
+            throw new IllegalAccessException("삭제할 수 있는 권한이 없습니다.");
+        }
+        Family memberFamily = familyRepository.findByMember_MemberIdAndFridge_FridgeId(requestDTO.getMemberId(), requestDTO.getFridgeId())
+                .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
+        familyRepository.delete(memberFamily);
     }
 }
