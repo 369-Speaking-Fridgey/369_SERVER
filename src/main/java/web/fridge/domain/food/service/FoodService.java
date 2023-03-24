@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
+import web.fridge.domain.food.controller.dto.FoodStatusRequestDTO;
 import web.fridge.domain.food.entity.Food;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.repository.FoodRepository;
@@ -52,15 +53,18 @@ public class FoodService {
     }
 
     @Transactional
-    public void removeFood(Long foodId) {
-        foodRepository.deleteById(foodId);
-    }
-
-    @Transactional
     public Food modifyFood(FoodEditRequestDTO requestDTO) {
         Food food = foodRepository.findById(requestDTO.getFoodId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 식재료입니다."));
         food.update(requestDTO);
+        return food;
+    }
+
+    @Transactional
+    public Food modifyFoodStatus(FoodStatusRequestDTO requestDTO) {
+        Food food = foodRepository.findById(requestDTO.getFoodId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 식재료입니다."));
+        food.updateStatus(requestDTO);
         return food;
     }
 }
