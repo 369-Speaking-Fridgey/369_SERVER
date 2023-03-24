@@ -32,6 +32,10 @@ public class Food extends BaseTimeEntity {
     private String name;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    private FoodStatus status;
+
+    @NotNull
     private String quantity;
 
     @Nullable
@@ -55,6 +59,7 @@ public class Food extends BaseTimeEntity {
         this.foodId = foodId;
         this.fridge = fridge;
         this.name = name;
+        this.status = FoodStatus.NONE;
         this.quantity = quantity;
         this.memo = memo;
         this.type = type;
