@@ -37,4 +37,13 @@ public class Invitation {
         this.fridge = fridge;
         this.member = member;
     }
+
+    public void setStatus(Boolean isAccepted) {
+        if (isAccepted == Boolean.FALSE){
+            this.status = InvitationStatus.REJECTED;
+        }
+        else {
+            this.status = InvitationStatus.ACCEPTED;
+        }
+    }
 }
