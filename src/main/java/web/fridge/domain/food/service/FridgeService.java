@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
+import web.fridge.domain.food.controller.dto.FridgeMemberWithdrawDTO;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
@@ -38,4 +39,9 @@ public class FridgeService {
         return memberList;
     }
 
+    public void removeFridgeMember(Member member, FridgeMemberWithdrawDTO requestDTO) {
+        Family family = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
+                .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
+        familyRepository.delete(family);
+    }
 }

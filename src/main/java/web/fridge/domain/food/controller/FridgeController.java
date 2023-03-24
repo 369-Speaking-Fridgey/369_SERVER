@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.fridge.domain.food.controller.dto.FridgeMemberInviteDTO;
+import web.fridge.domain.food.controller.dto.FridgeMemberWithdrawDTO;
 import web.fridge.domain.food.controller.dto.FridgeResponseDTO;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.food.service.FridgeService;
@@ -50,6 +51,12 @@ public class FridgeController {
         Invitation invitation = invitationService.inviteFridgeMember(member, requestDTO);
         InvitationResponseDTO invitationResponseDTO = new InvitationResponseDTO(invitation);
         return new ResponseEntity<>(invitationResponseDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/withdraw")
+    public ResponseEntity<?> fridgeMemberRemoveSelf(@AuthMember Member member, @RequestBody FridgeMemberWithdrawDTO requestDTO){
+        fridgeService.removeFridgeMember(member, requestDTO);
+        return new ResponseEntity<>("냉장고에서 탈퇴되셨습니다.", HttpStatus.OK);
     }
 
 }

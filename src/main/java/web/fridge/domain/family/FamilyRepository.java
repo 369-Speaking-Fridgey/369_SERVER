@@ -5,9 +5,13 @@ import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.food.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 public interface FamilyRepository extends JpaRepository<Family, Long> {
     List<Family> findByMember(Member member);
     List<Family> findAllByFridge(Fridge fridge);
+
+    Optional<Family> findByMemberAndFridge_FridgeId(Member member, Long fridgeId);
 }
