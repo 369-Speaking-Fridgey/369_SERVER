@@ -34,4 +34,8 @@ public class Member{
         this.email = email;
         this.profile = profile;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
