@@ -27,7 +27,7 @@ public class FridgeService {
     public List<Fridge> findFridgeListByMember(Member member) {
         List<Family> familyList = familyRepository.findByMember(member);
         List<Fridge> fridgeList = new ArrayList<>();
-        for (Family family : familyList){
+        for (Family family : familyList) {
             fridgeList.add(family.getFridge());
         }
         return fridgeList;
@@ -48,7 +48,7 @@ public class FridgeService {
     public void removeFridgeMember(Member member, FridgeMemberWithdrawDTO requestDTO) {
         Family family = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
-        familyRepository.delete(family);
+        family.setRole(Role.REMOVED);
     }
 
     @Transactional
@@ -60,7 +60,7 @@ public class FridgeService {
         }
         Family memberFamily = familyRepository.findByMember_MemberIdAndFridge_FridgeId(requestDTO.getMemberId(), requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
-        familyRepository.delete(memberFamily);
+        memberFamily.setRole(Role.REMOVED);
     }
 
     @Transactional
