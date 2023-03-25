@@ -65,8 +65,8 @@ public class FridgeController {
 
     @PostMapping("/stop")
     public ResponseEntity<?> fridgeRemoveByOwner(@AuthMember Member member, @RequestBody FridgeRemoveDTO requestDTO){
-        fridgeService.removeFridge(member, requestDTO);
-        return new ResponseEntity<>("냉장고를 삭제하였습니다.", HttpStatus.OK);
+        Fridge fridge = fridgeService.removeFridge(member, requestDTO);
+        return new ResponseEntity<>(new FridgeResponseDTO(member, fridge), HttpStatus.OK);
     }
 
 }

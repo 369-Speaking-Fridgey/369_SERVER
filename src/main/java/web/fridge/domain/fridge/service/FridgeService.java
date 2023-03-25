@@ -64,13 +64,14 @@ public class FridgeService {
     }
 
     @Transactional
-    public void removeFridge(Member member, FridgeRemoveDTO requestDTO) {
+    public Fridge removeFridge(Member member, FridgeRemoveDTO requestDTO) {
         Family ownerFamily = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
         if (ownerFamily.getRole() != Role.OWNER || ownerFamily.getFridge().getType() == FridgeType.PERSONAL) {
             throw new IllegalArgumentException("삭제할 수 있는 권한이 없습니다.");
         }
-        List<Family> familyList = familyRepository.findAllByFridge_FridgeId(requestDTO.getFridgeId());
-        familyRepository.deleteAll(familyList);
+        Fridge fridge = ownerFamily.getFridge();
+        fridge.setFridgeType(FridgeType.STOPPED);
+        return fridge;
     }
 }

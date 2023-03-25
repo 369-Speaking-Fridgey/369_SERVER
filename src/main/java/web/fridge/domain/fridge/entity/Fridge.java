@@ -30,4 +30,8 @@ public class Fridge {
         this.name = name;
         this.type = type;
     }
+
+    public void setFridgeType(FridgeType stopped) {
+        this.type = stopped;
+    }
 }
