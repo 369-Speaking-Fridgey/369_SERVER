@@ -1,4 +1,4 @@
-package web.fridge.domain.fridge.repository;
+package web.fridge.domain.food.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

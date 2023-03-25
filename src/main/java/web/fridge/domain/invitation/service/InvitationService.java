@@ -7,7 +7,7 @@ import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.entity.Role;
 import web.fridge.domain.fridge.controller.dto.FridgeMemberInviteDTO;
-import web.fridge.domain.food.repository.FridgeRepository;
+import web.fridge.domain.fridge.repository.FridgeRepository;
 import web.fridge.domain.invitation.InvitationRepository;
 import web.fridge.domain.invitation.controller.dto.InvitationAcceptDTO;
 import web.fridge.domain.invitation.entity.Invitation;

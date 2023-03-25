@@ -11,7 +11,7 @@ import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Role;
 import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.fridge.entity.FridgeType;
-import web.fridge.domain.food.repository.FridgeRepository;
+import web.fridge.domain.fridge.repository.FridgeRepository;
 import web.fridge.domain.member.controller.dto.GoogleLogInRequestDTO;
 import web.fridge.domain.member.controller.dto.NaverLogInRequestDTO;
 import web.fridge.domain.member.entity.Member;

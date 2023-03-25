@@ -11,7 +11,7 @@ import web.fridge.domain.fridge.controller.dto.FridgeMemberWithdrawDTO;
 import web.fridge.domain.fridge.controller.dto.FridgeRemoveDTO;
 import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.fridge.entity.FridgeType;
-import web.fridge.domain.food.repository.FridgeRepository;
+import web.fridge.domain.fridge.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
 
 import java.util.ArrayList;
