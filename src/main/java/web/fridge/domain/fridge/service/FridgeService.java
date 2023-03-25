@@ -1,4 +1,4 @@
-package web.fridge.domain.food.service;
+package web.fridge.domain.fridge.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Role;
-import web.fridge.domain.food.controller.dto.FridgeMemberRemoveDTO;
-import web.fridge.domain.food.controller.dto.FridgeMemberWithdrawDTO;
-import web.fridge.domain.food.controller.dto.FridgeRemoveDTO;
-import web.fridge.domain.food.entity.Fridge;
-import web.fridge.domain.food.entity.FridgeType;
+import web.fridge.domain.fridge.controller.dto.FridgeMemberRemoveDTO;
+import web.fridge.domain.fridge.controller.dto.FridgeMemberWithdrawDTO;
+import web.fridge.domain.fridge.controller.dto.FridgeRemoveDTO;
+import web.fridge.domain.fridge.entity.Fridge;
+import web.fridge.domain.fridge.entity.FridgeType;
 import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
 

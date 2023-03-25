@@ -1,7 +1,7 @@
-package web.fridge.domain.food.controller.dto;
+package web.fridge.domain.fridge.controller.dto;
 
 import lombok.Builder;
-import web.fridge.domain.food.entity.Fridge;
+import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
 public class FridgeResponseDTO {

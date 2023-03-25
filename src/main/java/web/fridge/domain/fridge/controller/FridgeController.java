@@ -1,12 +1,12 @@
-package web.fridge.domain.food.controller;
+package web.fridge.domain.fridge.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.fridge.domain.food.controller.dto.*;
-import web.fridge.domain.food.entity.Fridge;
-import web.fridge.domain.food.service.FridgeService;
+import web.fridge.domain.fridge.controller.dto.*;
+import web.fridge.domain.fridge.entity.Fridge;
+import web.fridge.domain.fridge.service.FridgeService;
 import web.fridge.domain.invitation.controller.dto.InvitationResponseDTO;
 import web.fridge.domain.invitation.entity.Invitation;
 import web.fridge.domain.invitation.service.InvitationService;
@@ -51,19 +51,19 @@ public class FridgeController {
         return new ResponseEntity<>(invitationResponseDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/withdraw")
+    @PostMapping("/withdraw")
     public ResponseEntity<?> fridgeMemberRemoveSelf(@AuthMember Member member, @RequestBody FridgeMemberWithdrawDTO requestDTO){
         fridgeService.removeFridgeMember(member, requestDTO);
         return new ResponseEntity<>("냉장고에서 탈퇴되셨습니다.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/bye")
+    @PostMapping("/bye")
     public ResponseEntity<?> fridgeMemberRemove(@AuthMember Member member, @RequestBody FridgeMemberRemoveDTO requestDTO) throws IllegalAccessException {
         fridgeService.removeFridgeMemberByOwner(member, requestDTO);
         return new ResponseEntity<>("냉장고에서 탈퇴되었습니다.", HttpStatus.OK);
     }
 
-    @DeleteMapping()
+    @PostMapping("/stop")
     public ResponseEntity<?> fridgeRemoveByOwner(@AuthMember Member member, @RequestBody FridgeRemoveDTO requestDTO){
         fridgeService.removeFridge(member, requestDTO);
         return new ResponseEntity<>("냉장고를 삭제하였습니다.", HttpStatus.OK);

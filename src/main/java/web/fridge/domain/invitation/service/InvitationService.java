@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.entity.Role;
-import web.fridge.domain.food.controller.dto.FridgeMemberInviteDTO;
+import web.fridge.domain.fridge.controller.dto.FridgeMemberInviteDTO;
 import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.invitation.InvitationRepository;
 import web.fridge.domain.invitation.controller.dto.InvitationAcceptDTO;

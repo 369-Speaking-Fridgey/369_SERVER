@@ -4,8 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import web.fridge.domain.family.entity.Role;
-import web.fridge.domain.food.entity.Fridge;
+import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
 

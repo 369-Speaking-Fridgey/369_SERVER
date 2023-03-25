@@ -1,4 +1,4 @@
-package web.fridge.domain.food.repository;
+package web.fridge.domain.fridge.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 import static web.fridge.domain.family.entity.QFamily.family;
 import static web.fridge.domain.food.entity.QFood.food;
-import static web.fridge.domain.food.entity.QFridge.fridge;
+import static web.fridge.domain.fridge.entity.QFridge.fridge;
 
 @Repository
 @RequiredArgsConstructor

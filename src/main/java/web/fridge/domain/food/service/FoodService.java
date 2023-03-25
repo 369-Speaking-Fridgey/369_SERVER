@@ -7,7 +7,7 @@ import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodStatusRequestDTO;
 import web.fridge.domain.food.entity.Food;
-import web.fridge.domain.food.entity.Fridge;
+import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.food.repository.FoodRepository;
 import web.fridge.domain.food.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
