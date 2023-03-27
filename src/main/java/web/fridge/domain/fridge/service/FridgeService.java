@@ -1,4 +1,4 @@
-package web.fridge.domain.food.service;
+package web.fridge.domain.fridge.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,12 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Role;
-import web.fridge.domain.food.controller.dto.FridgeMemberRemoveDTO;
-import web.fridge.domain.food.controller.dto.FridgeMemberWithdrawDTO;
-import web.fridge.domain.food.controller.dto.FridgeRemoveDTO;
-import web.fridge.domain.food.entity.Fridge;
-import web.fridge.domain.food.entity.FridgeType;
-import web.fridge.domain.food.repository.FridgeRepository;
+import web.fridge.domain.fridge.controller.dto.FridgeMemberRemoveDTO;
+import web.fridge.domain.fridge.controller.dto.FridgeMemberWithdrawDTO;
+import web.fridge.domain.fridge.controller.dto.FridgeRemoveDTO;
+import web.fridge.domain.fridge.entity.Fridge;
+import web.fridge.domain.fridge.entity.FridgeType;
+import web.fridge.domain.fridge.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class FridgeService {
     public List<Fridge> findFridgeListByMember(Member member) {
         List<Family> familyList = familyRepository.findByMember(member);
         List<Fridge> fridgeList = new ArrayList<>();
-        for (Family family : familyList){
+        for (Family family : familyList) {
             fridgeList.add(family.getFridge());
         }
         return fridgeList;
@@ -48,7 +48,7 @@ public class FridgeService {
     public void removeFridgeMember(Member member, FridgeMemberWithdrawDTO requestDTO) {
         Family family = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
-        familyRepository.delete(family);
+        family.setRole(Role.REMOVED);
     }
 
     @Transactional
@@ -60,17 +60,18 @@ public class FridgeService {
         }
         Family memberFamily = familyRepository.findByMember_MemberIdAndFridge_FridgeId(requestDTO.getMemberId(), requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
-        familyRepository.delete(memberFamily);
+        memberFamily.setRole(Role.REMOVED);
     }
 
     @Transactional
-    public void removeFridge(Member member, FridgeRemoveDTO requestDTO) {
+    public Fridge removeFridge(Member member, FridgeRemoveDTO requestDTO) {
         Family ownerFamily = familyRepository.findByMemberAndFridge_FridgeId(member, requestDTO.getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 접근입니다."));
         if (ownerFamily.getRole() != Role.OWNER || ownerFamily.getFridge().getType() == FridgeType.PERSONAL) {
             throw new IllegalArgumentException("삭제할 수 있는 권한이 없습니다.");
         }
-        List<Family> familyList = familyRepository.findAllByFridge_FridgeId(requestDTO.getFridgeId());
-        familyRepository.deleteAll(familyList);
+        Fridge fridge = ownerFamily.getFridge();
+        fridge.setFridgeType(FridgeType.STOPPED);
+        return fridge;
     }
 }

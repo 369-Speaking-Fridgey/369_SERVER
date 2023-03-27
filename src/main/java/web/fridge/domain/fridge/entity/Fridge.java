@@ -1,10 +1,9 @@
-package web.fridge.domain.food.entity;
+package web.fridge.domain.fridge.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import web.fridge.domain.member.entity.Member;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,5 +29,9 @@ public class Fridge {
         this.fridgeId = fridgeId;
         this.name = name;
         this.type = type;
+    }
+
+    public void setFridgeType(FridgeType stopped) {
+        this.type = stopped;
     }
 }

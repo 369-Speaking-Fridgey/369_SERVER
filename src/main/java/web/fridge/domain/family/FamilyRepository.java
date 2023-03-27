@@ -2,10 +2,9 @@ package web.fridge.domain.family;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import web.fridge.domain.family.entity.Family;
-import web.fridge.domain.food.entity.Fridge;
+import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.domain.member.entity.Member;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

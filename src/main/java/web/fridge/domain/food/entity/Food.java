@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 import web.fridge.domain.food.controller.dto.FoodEditRequestDTO;
 import web.fridge.domain.food.controller.dto.FoodStatusRequestDTO;
+import web.fridge.domain.fridge.entity.Fridge;
 import web.fridge.global.entity.BaseTimeEntity;
 
 
