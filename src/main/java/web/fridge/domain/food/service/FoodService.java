@@ -40,14 +40,17 @@ public class FoodService {
         Fridge fridge = fridgeRepository.findById(requestDTOList.get(0).getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 냉장고입니다."));
         for (FoodAddRequestDTO dto : requestDTOList){
-            foodList.add(Food.builder()
-                    .fridge(fridge)
-                    .name(dto.getName())
-                    .quantity(dto.getQuantity())
-                    .type(dto.getType())
-                    .memo(dto.getMemo())
-                    .freezeType(dto.getFreezeType())
-                    .expiryDate(dto.getExpiryDate()).build());
+            Food food = foodRepository.save(
+                    Food.builder()
+                            .fridge(fridge)
+                            .name(dto.getName())
+                            .quantity(dto.getQuantity())
+                            .type(dto.getType())
+                            .memo(dto.getMemo())
+                            .freezeType(dto.getFreezeType())
+                            .expiryDate(dto.getExpiryDate()).build()
+            );
+            foodList.add(food);
         }
         return foodList;
     }
