@@ -37,12 +37,15 @@ public class LogInController {
 
     @PostMapping("/google")
     public ResponseEntity<?> googleLogIn(@RequestBody GoogleLogInRequestDTO requestDTO){
+        log.info(requestDTO.getName());
         Member member = logInService.googleLogIn(requestDTO);
+        log.info(member.getMemberId().toString());
         OauthLogInResponseDTO responseDTO = OauthLogInResponseDTO.builder()
                 .accessToken(jwtService.createAccessToken(member.getMemberId()))
                 .refreshToken(jwtService.createRefreshToken(member.getEmail()))
                 .message("성공적으로 로그인되었습니다.")
                 .build();
+
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
