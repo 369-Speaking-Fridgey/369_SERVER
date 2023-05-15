@@ -1,11 +1,13 @@
 package web.fridge.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.family.entity.Family;
 import web.fridge.domain.family.FamilyRepository;
 import web.fridge.domain.family.entity.Role;
@@ -21,6 +23,7 @@ import web.fridge.domain.jwt.JwtService;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class LogInService {
 
@@ -41,6 +44,7 @@ public class LogInService {
                 .provider("KAKAO")
                 .profile(kakaoProfileInfo.get("profile_image_url").toString())
                 .build();
+
         List<Family> familyList = familyRepository.findByMember(member);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
@@ -52,26 +56,29 @@ public class LogInService {
         return new ResponseEntity<>("카카오 로그인에 성공했습니다", httpHeaders, HttpStatus.OK);
     }
 
+    @Transactional
     public Member googleLogIn(GoogleLogInRequestDTO requestDTO) {
         Member member = memberRepository.findByEmail(requestDTO.getEmail())
                 .orElse(requestDTO.toEntity());
-        List<Family> familyList = familyRepository.findByMember(member);
+        Member savedMember = memberRepository.save(member);
+        List<Family> familyList = familyRepository.findByMember(savedMember);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).role(Role.OWNER).build());
+            Family family = familyRepository.save(Family.builder().member(savedMember).fridge(fridge).role(Role.OWNER).build());
         }
-        return memberRepository.save(member);
+        return savedMember;
     }
 
     public Member naverLogIn(NaverLogInRequestDTO requestDTO) {
         Member member = memberRepository.findByEmail(requestDTO.getEmail())
                 .orElse(requestDTO.toEntity());
-        List<Family> familyList = familyRepository.findByMember(member);
+        Member savedMember = memberRepository.save(member);
+        List<Family> familyList = familyRepository.findByMember(savedMember);
         if (familyList.isEmpty()) {
             Fridge fridge = fridgeRepository.save(Fridge.builder().type(FridgeType.PERSONAL).name(member.getName() + "'s Fridge").build());
-            Family family = familyRepository.save(Family.builder().member(member).fridge(fridge).role(Role.OWNER).build());
+            Family family = familyRepository.save(Family.builder().member(savedMember).fridge(fridge).role(Role.OWNER).build());
         }
-        return memberRepository.save(member);
+        return savedMember;
     }
 
 }
