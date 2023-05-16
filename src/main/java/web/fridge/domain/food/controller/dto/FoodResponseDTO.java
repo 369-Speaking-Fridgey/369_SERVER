@@ -2,12 +2,14 @@ package web.fridge.domain.food.controller.dto;
 
 import com.sun.istack.NotNull;
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.lang.Nullable;
 import web.fridge.domain.food.entity.Food;
 
 import javax.persistence.Column;
 import java.time.LocalDateTime;
 
+@Getter
 public class FoodResponseDTO {
     private Long foodId;
     private String name;

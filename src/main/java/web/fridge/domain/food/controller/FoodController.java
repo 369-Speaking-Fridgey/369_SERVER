@@ -1,6 +1,7 @@
 package web.fridge.domain.food.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import web.fridge.domain.member.entity.Member;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "food", produces = "application/json; charset=utf8")
 @RequiredArgsConstructor
@@ -23,12 +25,17 @@ public class FoodController {
 
     private final FoodService foodService;
 
-    @GetMapping("/{fridgeId}")
+    @GetMapping("/fridge/{fridgeId}")
     public ResponseEntity<?> foodListFindByType
-            (@AuthMember Member member, @PathVariable Long fridgeId,
-             @RequestParam(name = "type") String type, @RequestParam(name = "freeze") String freezeType)
+            (@AuthMember Member member, @PathVariable Long fridgeId
+             )
     {
-        List<Food> foodList = foodService.findFoodList(fridgeId, type, freezeType);
+        List<Food> foodList = foodService.findFoodList(fridgeId, null, null);
+        for (Food food : foodList) {
+            log.info(food.getType());
+            log.info(food.getFreezeType());
+            log.info(food.getName());
+        }
         List<FoodResponseDTO> responseDTOList = foodList.stream().map(FoodResponseDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
