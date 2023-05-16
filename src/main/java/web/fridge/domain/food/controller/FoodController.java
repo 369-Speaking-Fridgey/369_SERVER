@@ -48,6 +48,9 @@ public class FoodController {
 
     @PostMapping()
     public ResponseEntity<?> foodListAdd(@AuthMember Member member, @RequestBody List<FoodAddRequestDTO> requestDTOList){
+        for(FoodAddRequestDTO foodAddRequestDTO : requestDTOList) {
+            log.info(foodAddRequestDTO.getName());
+        }
         List<Food> foodList = foodService.addFood(requestDTOList);
         return new ResponseEntity<>("식재료를 저장했습니다.", HttpStatus.CREATED);
     }
