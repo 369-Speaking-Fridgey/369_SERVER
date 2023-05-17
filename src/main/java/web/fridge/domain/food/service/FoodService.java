@@ -1,6 +1,7 @@
 package web.fridge.domain.food.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.fridge.domain.food.controller.dto.FoodAddRequestDTO;
@@ -12,9 +13,11 @@ import web.fridge.domain.food.repository.FoodRepository;
 import web.fridge.domain.fridge.repository.FridgeRepository;
 import web.fridge.domain.member.entity.Member;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FoodService {
@@ -40,14 +43,20 @@ public class FoodService {
         Fridge fridge = fridgeRepository.findById(requestDTOList.get(0).getFridgeId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 냉장고입니다."));
         for (FoodAddRequestDTO dto : requestDTOList){
-            foodList.add(Food.builder()
-                    .fridge(fridge)
-                    .name(dto.getName())
-                    .quantity(dto.getQuantity())
-                    .type(dto.getType())
-                    .memo(dto.getMemo())
-                    .freezeType(dto.getFreezeType())
-                    .expiryDate(dto.getExpiryDate()).build());
+            Food food = foodRepository.save(
+                    Food.builder()
+                            .fridge(fridge)
+                            .name(dto.getName())
+                            .quantity(dto.getQuantity())
+                            .type(dto.getType())
+                            .memo(dto.getMemo())
+                            .freezeType(dto.getFreezeType())
+                            .expiryDate(LocalDateTime.now().plusWeeks(1)).build()
+            );
+            foodList.add(food);
+        }
+        for(Food food : foodList) {
+            log.info(food.getName());
         }
         return foodList;
     }
